@@ -7,6 +7,7 @@ from string import *
 import sqlite3 
 import ConfigParser
 import logging
+import twitter
 
 
 class TwitterBot(object):
@@ -16,7 +17,9 @@ class TwitterBot(object):
         self._server = POP3(config.get('pop', 'hostname'))
         self._messages = []
         self._logger = logger
-        self._twitter_screenname = config.get('twitter', 'screenname')
+        self._twitter_username = config.get('twitter', 'username')
+        self._api = twitter.Api(username=self._twitter_username, \
+                                password=config.get('twitter', 'password'))
 
         # Authenticate to the POP server
         self._server.getwelcome()
@@ -99,12 +102,47 @@ class CtaTwitterBot(TwitterBot):
         cursor.close()
 
     def parse_message(self, message):
-        if (message['X-Twittercreatedat'] and \
-            message['X-Twitterrecipientscreenname'] == self._twitter_screenname and \
-            not self._seen_message(message)):
-            # This is a new twitter message to us, log it in the database
-            self._log_message(message)
+        logger.debug("Begin parsing message with id %s" % (message['Message-ID']))
 
+        if message['X-Twittercreatedat']:
+            email_type = message['X-Twitteremailtype']
+            sender_screen_name = message['X-Twittersenderscreenname']
+            recipient_screen_name = message['X-Twitterrecipientscreenname']
+            if (recipient_screen_name == self._twitter_username and \
+                not self._seen_message(message)):
+                # This is a new twitter message to us
+                self._logger.debug("Message is a %s message from %s" % \
+                                   (email_type, \
+                                    sender_screen_name))
+
+
+                if email_type == 'is_following':
+                    # Message is a notification that someone is following us.
+                    # Follow them too.
+                    friends = self._api.GetFriends()
+                    is_friend = False
+                    for friend in friends:
+                        if sender_screen_name == friend.screen_name:
+                            is_friend = True
+
+                    if not is_friend:
+                       # We're not friends with this person yet.  Befriend them.
+                       self._api.CreateFriendship(message['X-Twittersenderscreenname'])
+                elif email_type == 'direct_message':
+                    # TODO: Implement direct message handling
+                    pass
+
+                # Everything we wanted to do worked, so log the message so we don't repeat
+                # these actions in the future
+                self._log_message(message) # log it in the database
+
+            else: 
+                self._logger.debug("Message has been seen before or isn't to us.")
+
+        else:
+            self._logger.debug("Message is not from Twitter") 
+        
+        logger.debug("End parsing message with id %s" % (message['Message-ID']))
 
 # Set up logging
 logger = logging.getLogger('ctatwitter')
