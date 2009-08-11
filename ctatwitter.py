@@ -68,28 +68,41 @@ class CtaTwitterBot(TwitterBot):
         if config.get('database', 'engine') == 'sqlite':
 	    self._conn = sqlite3.connect(config.get('database', 'file'))
 
+    def _seen_message(self, message):
+        cursor = self._conn.cursor() 
+        cursor.execute("SELECT messageid FROM ctatwitter WHERE messageid = ?", [message['Message-ID']])
+        if (cursor.fetchone() != None):
+            # We have seen this message before 
+            cursor.close()
+            return True
+        else:
+            cursor.close()
+            return False
+
     def _log_message(self, message):        
         cursor = self._conn.cursor() 
-        cursor.execute("SELECT messageid FROM ctatwitter WHERE messageid = '?'", message['Message-ID'])
-        if (cursor.fetchone() == None):
-            # We haven't seen this message yet, log it.
-            cursor.execute("INSERT INTO ctatwitter(messageid, createdat, recipientid, recipientscreenname, recipientname, campaignid, emailtype, senderid, sendername, senderscreenname) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
-                           message['Message-ID'], \
-                           message['X-Twittercreatedat'], \
-                           message['X-Twitterrecipientid'], \
-                           message['X-Twitterrecipientscreenname'], \
-                           message['X-Twitterrecipientname'], \
-                           message['X-Campaignid'], \
-                           message['X-Twitteremailtype'], \
-                           message['X-Twittersenderid'], \
-                           message['X-Twittersenderscreenname'], \
-            ) 
-            self._conn.commit()
+        cursor.execute("INSERT INTO ctatwitter(messageid, createdat, recipientid, recipientscreenname, recipientname, campaignid, emailtype, senderid, sendername, senderscreenname) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
+                       [ \
+                       message['Message-ID'], \
+                       message['X-Twittercreatedat'], \
+                       message['X-Twitterrecipientid'], \
+                       message['X-Twitterrecipientscreenname'], \
+                       message['X-Twitterrecipientname'], \
+                       message['X-Campaignid'], \
+                       message['X-Twitteremailtype'], \
+                       message['X-Twittersenderid'], \
+                       message['X-Twittersendername'], \
+                       message['X-Twittersenderscreenname'], \
+                       ] \
+        ) 
+        self._conn.commit()
         cursor.close()
 
     def parse_message(self, message):
-        if (message['X-Twittercreatedat'] and message['X-Twitterrecipientscreenname'] == self._twitter_screenname):
-            # This is a twitter message to us, log it in the database
+        if (message['X-Twittercreatedat'] and \
+            message['X-Twitterrecipientscreenname'] == self._twitter_screenname and \
+            not self._seen_message(message)):
+            # This is a new twitter message to us, log it in the database
             self._log_message(message)
 
 
