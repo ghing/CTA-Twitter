@@ -9,6 +9,22 @@ import ConfigParser
 import logging
 import twitter
 
+class ShortMessage(object):
+    """A class to represent short messages such as a tweet or SMS message"""
+
+    def __init__(self, msg):
+        self._msg = msg
+
+    def split(self, max_length):
+        """Split the message at word boundaries into strings of max_length length.  Returns a list of strings of max_length or less."""
+        # TODO: Implement this method
+        pass
+
+class BusTrackerMessageParser(object):
+    """Class to encapsulate parsing messages and returning a response."""
+    # TODO: Implement this class.
+    pass
+
 
 class TwitterBot(object):
     '''A class for a bot processs that will poll a POP server for Twitter e-mails and respond to them''' 
@@ -129,6 +145,8 @@ class CtaTwitterBot(TwitterBot):
                        # We're not friends with this person yet.  Befriend them.
                        self._api.CreateFriendship(message['X-Twittersenderscreenname'])
                 elif email_type == 'direct_message':
+                    # TODO: See if message headers are different for is_following and 
+                    #       direct_message messages.
                     # TODO: Implement direct message handling
                     pass
 
