@@ -82,7 +82,7 @@ class CtaTwitterBot(TwitterBot):
             cursor.close()
             return False
 
-    def _log_message(self, message):        
+    def _db_log_message(self, message):        
         cursor = self._conn.cursor() 
         cursor.execute("INSERT INTO ctatwitter(messageid, createdat, recipientid, recipientscreenname, recipientname, campaignid, emailtype, senderid, sendername, senderscreenname) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
                        [ \
@@ -134,7 +134,7 @@ class CtaTwitterBot(TwitterBot):
 
                 # Everything we wanted to do worked, so log the message so we don't repeat
                 # these actions in the future
-                self._log_message(message) # log it in the database
+                self._db_log_message(message) # log it in the database
 
             else: 
                 self._logger.debug("Message has been seen before or isn't to us.")
