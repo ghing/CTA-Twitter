@@ -8,5 +8,6 @@ CREATE TABLE ctatwitter (
     emailtype TEXT,
     senderid TEXT,
     sendername TEXT,
-    senderscreenname TEXT
+    senderscreenname TEXT,
+    directmessageid TEXT
 );

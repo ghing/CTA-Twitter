@@ -71,19 +71,6 @@ class TwitterBot(object):
         self._server.quit()
 
 class CtaTwitterBot(TwitterBot):
-    # NOTE: Just for future reference I'm going to put the headers for a twitter
-    # generated e-mail here.
-    #X-Twittercreatedat: Wed Jul 29 19:58:32 +0000 2009
-    #X-Twitterrecipientid: 61280330
-    #X-Twitterrecipientscreenname: ctabt
-    #X-Campaignid: twitter20080331162631
-    #X-Twitteremailtype: is_following
-    #Bounces-To: Twitter <twitter-follow-twitter=terrorware.com@postmaster.twitter.com>
-    #X-Twittersenderid: 11360602
-    #Errors-To: Twitter <twitter-follow-twitter=terrorware.com@postmaster.twitter.com>
-    #X-Twittersendername: geoffhing
-    #X-Twittersenderscreenname: geoffhing
-    #X-Twitterrecipientname: CTA Bus Tracker 
 
     def __init__(self, config, logger):
         TwitterBot.__init__(self, config, logger)
@@ -103,7 +90,7 @@ class CtaTwitterBot(TwitterBot):
 
     def _db_log_message(self, message):        
         cursor = self._conn.cursor() 
-        cursor.execute("INSERT INTO ctatwitter(messageid, createdat, recipientid, recipientscreenname, recipientname, campaignid, emailtype, senderid, sendername, senderscreenname) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
+        cursor.execute("INSERT INTO ctatwitter(messageid, createdat, recipientid, recipientscreenname, recipientname, campaignid, emailtype, senderid, sendername, senderscreenname, directmessageid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
                        [ \
                        message['Message-ID'], \
                        message['X-Twittercreatedat'], \
@@ -115,6 +102,7 @@ class CtaTwitterBot(TwitterBot):
                        message['X-Twittersenderid'], \
                        message['X-Twittersendername'], \
                        message['X-Twittersenderscreenname'], \
+                       message['X-Twitterdirectmessageid'], \
                        ] \
         ) 
         self._conn.commit()
@@ -137,6 +125,21 @@ class CtaTwitterBot(TwitterBot):
 
                 if email_type == 'is_following':
                     # Message is a notification that someone is following us.
+
+                    # NOTE: Just for future reference here are the e-mail headers for a 
+                    # is_following message e-mail 
+                    #X-Twittercreatedat: Wed Jul 29 19:58:32 +0000 2009
+                    #X-Twitterrecipientid: 61280330
+                    #X-Twitterrecipientscreenname: ctabt
+                    #X-Campaignid: twitter20080331162631
+                    #X-Twitteremailtype: is_following
+                    #Bounces-To: Twitter <twitter-follow-twitter=terrorware.com@postmaster.twitter.com>
+                    #X-Twittersenderid: 11360602
+                    #Errors-To: Twitter <twitter-follow-twitter=terrorware.com@postmaster.twitter.com>
+                    #X-Twittersendername: geoffhing
+                    #X-Twittersenderscreenname: geoffhing
+                    #X-Twitterrecipientname: CTA Bus Tracker 
+
                     # Follow them too.
                     friends = self._api.GetFriends()
                     is_friend = False
@@ -150,8 +153,22 @@ class CtaTwitterBot(TwitterBot):
                        self._api.PostDirectMessage(message['X-Twittersenderscreenname'], \
                            "Thanks for using the CTA Bus Tracker Twitter interface.  Msg. 'help' for a list of commands or see tinyurl.com/ctabt")
                 elif email_type == 'direct_message':
-                    # TODO: See if message headers are different for is_following and 
-                    #       direct_message messages.
+                    # Message is a direct message.
+                    
+                    # NOTE: Here are the headers for a direct message e-mail.
+                    #X-Twittercreatedat: Tue Aug 11 18:01:47 +0000 2009
+                    #X-Twitterrecipientid: 61280330
+                    #X-Twitterrecipientscreenname: ctabt
+                    #X-Twitteremailtype: direct_message
+                    #X-Twitterdirectmessageid: 292129578
+                    #Bounces-To: Twitter <twitter-dm-twitter=terrorware.com@postmaster.twitter.com>
+                    #X-Twittersenderid: 11360602
+                    #Errors-To: Twitter <twitter-dm-twitter=terrorware.com@postmaster.twitter.com>
+                    #X-Twittersendername: geoffhing
+                    #X-Twittersenderscreenname: geoffhing
+                    #X-Twitterrecipientname: CTA Bus Tracker
+
+                    # TODO: See if we can parse the message directly from the e-mail.
                     # TODO: Implement direct message handling
                     message_parser = BusTrackerMessageParser() 
                     response  = message_parser.get_response() 
