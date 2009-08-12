@@ -20,10 +20,46 @@ class ShortMessage(object):
         # TODO: Implement this method
         pass
 
+# NOTE: This is the command syntax:
+# 
+# help: Outputs help message
+#
+# <bus_line_number> stops|s (<stop_name>): List stops and stop IDs
+# Example: "2 stops Stony Island" lists all #2 bus stops that have Stony Island in the name
+#
+# <bus_line_number> <stop_id>|<stop_name>: List next busses
+# Example: "2 10487" gets the next busses for stop with stop ID 10487
+# Example: "2 Stony Island" gets the next busses for all stops with Stony Island in the name
 class BusTrackerMessageParser(object):
     """Class to encapsulate parsing messages and returning a response."""
 
     def get_response(msg):
+        # Split the message into tokens
+        msg_tokens = msg.split()
+        
+        if (msg_tokens[0] == 'help' or msg_tokens[0] == 'h'):
+            # TODO: Implement help message
+            pass
+        elif (msg.tokens[0].isdigit()):
+            # First token is a number, interpret it as a bus line
+            if (msg.tokens[1] == 'stops' or msg.tokens[1] == 's'):
+                # List stops
+
+                if msg.tokens[2]:
+                    # There's more info, list only the stops matching the remaining tokens 
+                    # TODO: Figure out algorithm for intelligently matching strings to stops
+                    pass
+            else:
+                # Entered the name or id of a stop, try to get next busses.
+                if (msg.tokens[1].isdigit()):
+                    # Numeric value, interpret this as a stop ID
+                    pass
+                else:
+                    # Textual value, try to search for a stop that matches
+                    pass
+
+                # Search for the upcoming busses
+
         # For now, just send an auto-Threply
         response = "This doesn't do much yet.  Please check back soon."
         return response
