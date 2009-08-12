@@ -22,8 +22,11 @@ class ShortMessage(object):
 
 class BusTrackerMessageParser(object):
     """Class to encapsulate parsing messages and returning a response."""
-    # TODO: Implement this class.
-    pass
+
+    def get_response(msg):
+        # For now, just send an auto-Threply
+        response = "This doesn't do much yet.  Please check back soon."
+        return response
 
 
 class TwitterBot(object):
@@ -144,11 +147,15 @@ class CtaTwitterBot(TwitterBot):
                     if not is_friend:
                        # We're not friends with this person yet.  Befriend them.
                        self._api.CreateFriendship(message['X-Twittersenderscreenname'])
+                       self._api.PostDirectMessage(message['X-Twittersenderscreenname'], \
+                           "Thanks for using the CTA Bus Tracker Twitter interface.  Msg. 'help' for a list of commands or see tinyurl.com/ctabt")
                 elif email_type == 'direct_message':
                     # TODO: See if message headers are different for is_following and 
                     #       direct_message messages.
                     # TODO: Implement direct message handling
-                    pass
+                    message_parser = BusTrackerMessageParser() 
+                    response  = message_parser.get_response() 
+                    self._api.PostDirectMessage(message['X-Twittersenderscreenname'], response)
 
                 # Everything we wanted to do worked, so log the message so we don't repeat
                 # these actions in the future
@@ -156,7 +163,7 @@ class CtaTwitterBot(TwitterBot):
 
             else: 
                 self._logger.debug("Message has been seen before or isn't to us.")
-
+        
         else:
             self._logger.debug("Message is not from Twitter") 
         
