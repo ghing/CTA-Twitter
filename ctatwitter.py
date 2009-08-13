@@ -124,7 +124,7 @@ class CtaTwitterBot(TwitterBot):
             cursor.close()
             return False
 
-    def _db_log_message(self, message):        
+    def _db_log_message(self, message, direct_message):        
         cursor = self._conn.cursor() 
         cursor.execute("INSERT INTO emails(messageid, createdat, recipientid, recipientscreenname, recipientname, campaignid, emailtype, senderid, sendername, senderscreenname, directmessageid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
                        [ \
@@ -141,6 +141,9 @@ class CtaTwitterBot(TwitterBot):
                        message['X-Twitterdirectmessageid'], \
                        ] \
         ) 
+        if message['X-Twitteremailtype'] == 'direct_message':
+            cursor.execute("INSERT INTO direct_messages(directmessageid, message) values (?, ?)", \
+                           [message['X-Twitterdirectmessageid'], direct_message])
         self._conn.commit()
         cursor.close()
 
@@ -151,6 +154,7 @@ class CtaTwitterBot(TwitterBot):
             email_type = message['X-Twitteremailtype']
             sender_screen_name = message['X-Twittersenderscreenname']
             recipient_screen_name = message['X-Twitterrecipientscreenname']
+            direct_message = None
 
             if message.is_multipart():
                 for message_part in message.get_payload():
@@ -225,7 +229,7 @@ class CtaTwitterBot(TwitterBot):
 
                 # Everything we wanted to do worked, so log the message so we don't repeat
                 # these actions in the future
-                self._db_log_message(message) # log it in the database
+                self._db_log_message(message, direct_message) # log it in the database
 
             else: 
                 self._logger.debug("Message has been seen before or isn't to us.")
