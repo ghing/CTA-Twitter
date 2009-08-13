@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import getopt, sys
 from poplib import *
 import os
 from email.Parser import Parser
@@ -85,7 +86,7 @@ class BusTrackerMessageParser(object):
                 # Search for the upcoming busses
 
         # For now, just send an auto-Threply
-        response = "This doesn't do much yet.  Please check back soon."
+        response = "This doesn't do much yet.  See tinyurl.com/ctatwit for updates."
         return response
 
 
@@ -172,7 +173,7 @@ class CtaTwitterBot(TwitterBot):
         cursor.close()
 
     def parse_message(self, message):
-        logger.debug("Begin parsing message with id %s" % (message['Message-ID']))
+        self._logger.debug("Begin parsing message with id %s" % (message['Message-ID']))
 
         if message['X-Twittercreatedat']:
             email_type = message['X-Twitteremailtype']
@@ -261,19 +262,37 @@ class CtaTwitterBot(TwitterBot):
         else:
             self._logger.debug("Message is not from Twitter") 
         
-        logger.debug("End parsing message with id %s" % (message['Message-ID']))
+        self._logger.debug("End parsing message with id %s" % (message['Message-ID']))
+        self._logger.debug(" ")
+        
+def main():        
+    # Set up logging
+    logger = logging.getLogger('ctatwitter')
+    handler = logging.StreamHandler()
+    logger.addHandler(handler)
+    logger.setLevel(logging.DEBUG)
 
-# Set up logging
-logger = logging.getLogger('ctatwitter')
-handler = logging.StreamHandler()
-logger.addHandler(handler)
-logger.setLevel(logging.DEBUG)
+    # Parse command line options
+    config_file = 'ctatwitter.conf'
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "f:", ["file="])
+    except getopt.GetoptError, err:
+        print str(err)
+        sys.exit(2)
 
-# Load the configuration
-config = ConfigParser.ConfigParser()
-# TODO: Make the config filename a command line argument 
-config.read('ctatwitter.conf')
+    for o, a in opts:
+        if o in ("-f", "--file"):
+            config_file = a
+        else:
+            assert False, "unhandled option"
 
-bot = CtaTwitterBot(config, logger)
-bot.get_messages()
-bot.parse_messages()
+    # Load the configuration
+    config = ConfigParser.ConfigParser()
+    config.read(config_file)
+
+    bot = CtaTwitterBot(config, logger)
+    bot.get_messages()
+    bot.parse_messages()
+
+if __name__ ==  "__main__":
+    main()
