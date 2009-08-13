@@ -66,7 +66,7 @@ class BusTrackerMessageParser(object):
                 # Search for the upcoming busses
 
         # For now, just send an auto-Threply
-        response = "This doesn't do much yet.  Please check back soon."
+        response = "This doesn't do much yet.  See tinyurl.com/ctatwit for updates."
         return response
 
 
