@@ -18,7 +18,11 @@ class ShortMessage(object):
     def split(self, max_length):
         """Split the message at word boundaries into strings of max_length length.  Returns a list of strings of max_length or less."""
         # TODO: Implement this method
-        pass
+        if len(self._msg) <= max_length:
+            # Message is within the length limit.  Just return it.
+            return [self._msg]
+        else:
+            pass
 
 # NOTE: This is the command syntax:
 # 
