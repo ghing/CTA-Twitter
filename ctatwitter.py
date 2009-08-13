@@ -115,7 +115,7 @@ class CtaTwitterBot(TwitterBot):
 
     def _seen_message(self, message):
         cursor = self._conn.cursor() 
-        cursor.execute("SELECT messageid FROM ctatwitter WHERE messageid = ?", [message['Message-ID']])
+        cursor.execute("SELECT messageid FROM emails WHERE messageid = ?", [message['Message-ID']])
         if (cursor.fetchone() != None):
             # We have seen this message before 
             cursor.close()
@@ -126,7 +126,7 @@ class CtaTwitterBot(TwitterBot):
 
     def _db_log_message(self, message):        
         cursor = self._conn.cursor() 
-        cursor.execute("INSERT INTO ctatwitter(messageid, createdat, recipientid, recipientscreenname, recipientname, campaignid, emailtype, senderid, sendername, senderscreenname, directmessageid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
+        cursor.execute("INSERT INTO emails(messageid, createdat, recipientid, recipientscreenname, recipientname, campaignid, emailtype, senderid, sendername, senderscreenname, directmessageid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
                        [ \
                        message['Message-ID'], \
                        message['X-Twittercreatedat'], \
