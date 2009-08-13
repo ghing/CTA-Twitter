@@ -37,14 +37,14 @@ class ShortMessage(object):
 class BusTrackerMessageParser(object):
     """Class to encapsulate parsing messages and returning a response."""
 
-    def get_response(msg):
+    def get_response(self, msg):
         # Split the message into tokens
         msg_tokens = msg.split()
         
         if (msg_tokens[0] == 'help' or msg_tokens[0] == 'h'):
             # TODO: Implement help message
             pass
-        elif (msg.tokens[0].isdigit()):
+        elif (msg_tokens[0].isdigit()):
             # First token is a number, interpret it as a bus line
             if (msg.tokens[1] == 'stops' or msg.tokens[1] == 's'):
                 # List stops
@@ -119,7 +119,7 @@ class CtaTwitterBot(TwitterBot):
 
     def _seen_message(self, message):
         cursor = self._conn.cursor() 
-        cursor.execute("SELECT messageid FROM ctatwitter WHERE messageid = ?", [message['Message-ID']])
+        cursor.execute("SELECT messageid FROM emails WHERE messageid = ?", [message['Message-ID']])
         if (cursor.fetchone() != None):
             # We have seen this message before 
             cursor.close()
@@ -128,9 +128,9 @@ class CtaTwitterBot(TwitterBot):
             cursor.close()
             return False
 
-    def _db_log_message(self, message):        
+    def _db_log_message(self, message, direct_message):        
         cursor = self._conn.cursor() 
-        cursor.execute("INSERT INTO ctatwitter(messageid, createdat, recipientid, recipientscreenname, recipientname, campaignid, emailtype, senderid, sendername, senderscreenname, directmessageid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
+        cursor.execute("INSERT INTO emails(messageid, createdat, recipientid, recipientscreenname, recipientname, campaignid, emailtype, senderid, sendername, senderscreenname, directmessageid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
                        [ \
                        message['Message-ID'], \
                        message['X-Twittercreatedat'], \
@@ -145,6 +145,9 @@ class CtaTwitterBot(TwitterBot):
                        message['X-Twitterdirectmessageid'], \
                        ] \
         ) 
+        if message['X-Twitteremailtype'] == 'direct_message':
+            cursor.execute("INSERT INTO direct_messages(directmessageid, message) values (?, ?)", \
+                           [message['X-Twitterdirectmessageid'], direct_message])
         self._conn.commit()
         cursor.close()
 
@@ -155,6 +158,15 @@ class CtaTwitterBot(TwitterBot):
             email_type = message['X-Twitteremailtype']
             sender_screen_name = message['X-Twittersenderscreenname']
             recipient_screen_name = message['X-Twitterrecipientscreenname']
+            direct_message = None
+
+            if message.is_multipart():
+                for message_part in message.get_payload():
+                    if message_part.get_content_type() == 'text/plain':
+                        message_body = message_part.get_payload() 
+            else:
+                message_body = message.get_payload()
+
             if (recipient_screen_name == self._twitter_username and \
                 not self._seen_message(message)):
                 # This is a new twitter message to us
@@ -209,14 +221,19 @@ class CtaTwitterBot(TwitterBot):
                     #X-Twitterrecipientname: CTA Bus Tracker
 
                     # TODO: See if we can parse the message directly from the e-mail.
+                    # Assume direct message is the first line of the e-mail body.
+                    # From my tests it appears to be
+                    direct_message = message_body.splitlines()[0]
+                    # logger.debug(direct_message)
+
                     # TODO: Implement direct message handling
                     message_parser = BusTrackerMessageParser() 
-                    response  = message_parser.get_response() 
+                    response  = message_parser.get_response(direct_message) 
                     self._api.PostDirectMessage(message['X-Twittersenderscreenname'], response)
 
                 # Everything we wanted to do worked, so log the message so we don't repeat
                 # these actions in the future
-                self._db_log_message(message) # log it in the database
+                self._db_log_message(message, direct_message) # log it in the database
 
             else: 
                 self._logger.debug("Message has been seen before or isn't to us.")
