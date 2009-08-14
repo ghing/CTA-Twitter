@@ -207,16 +207,16 @@ class CtaTwitterBot(TwitterBot):
                     #X-Twittersenderscreenname: geoffhing
                     #X-Twitterrecipientname: CTA Bus Tracker
 
-                    # TODO: See if we can parse the message directly from the e-mail.
                     # Assume direct message is the first line of the e-mail body.
                     # From my tests it appears to be
                     direct_message = message_body.splitlines()[0]
                     # logger.debug(direct_message)
 
-                    # TODO: Implement direct message handling
                     message_parser = BusTrackerMessageParser() 
                     response  = message_parser.get_response(direct_message) 
-                    self._api.PostDirectMessage(message['X-Twittersenderscreenname'], response)
+                    response_message = shortmessage.ShortMessage(response)
+                    for response_direct_message in response_message.split():
+                      self._api.PostDirectMessage(message['X-Twittersenderscreenname'], response_direct_message)
 
                 # Everything we wanted to do worked, so log the message so we don't repeat
                 # these actions in the future
@@ -265,9 +265,10 @@ def main():
         bot.parse_messages()
     else:
         message_parser = BusTrackerMessageParser() 
-        response  = message_parser.get_response(command) 
-        for message in response:
-            print message
+        response  = message_parser.get_response(direct_message) 
+        response_message = shortmessage.ShortMessage(response)
+        for response_direct_message in response_message.split():
+            print response_direct_message
         
 
 if __name__ ==  "__main__":
