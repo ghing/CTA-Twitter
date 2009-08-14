@@ -18,7 +18,7 @@ class ShortMessage(object):
                message = ""
                max_len_reached = False
                while not max_len_reached:
-                   if len(message) + len(msg_words[0]) <= max_length:
+                   if len(msg_words) > 0 and len(message) + len(msg_words[0]) <= max_length:
                        # Our message isn't full length yet
                        message += msg_words.pop(0)
 
