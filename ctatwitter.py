@@ -241,7 +241,7 @@ def main():
     # Parse command line options
     config_file = 'ctatwitter.conf'
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "f:", ["file="])
+        opts, args = getopt.getopt(sys.argv[1:], "f:c:", ["file=", "command="])
     except getopt.GetoptError, err:
         print str(err)
         sys.exit(2)
@@ -249,6 +249,8 @@ def main():
     for o, a in opts:
         if o in ("-f", "--file"):
             config_file = a
+        if o in ("-c", "--command"):
+            command = a
         else:
             assert False, "unhandled option"
 
@@ -256,9 +258,17 @@ def main():
     config = ConfigParser.ConfigParser()
     config.read(config_file)
 
-    bot = CtaTwitterBot(config, logger)
-    bot.get_messages()
-    bot.parse_messages()
+    if not command:
+        # No command passed on the command line.  Attempt to check messages in e-mail.
+        bot = CtaTwitterBot(config, logger)
+        bot.get_messages()
+        bot.parse_messages()
+    else:
+        message_parser = BusTrackerMessageParser() 
+        response  = message_parser.get_response(command) 
+        for message in response:
+            print message
+        
 
 if __name__ ==  "__main__":
     main()
