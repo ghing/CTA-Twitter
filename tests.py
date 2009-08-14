@@ -36,6 +36,19 @@ class ShortMessageTestCase(unittest.TestCase):
         self.assertEqual(split_messages[0], "This message is going to be greater than 140 characters split on a word boundary. It is hard to make strings of specific character length. I")
         self.assertEqual(split_messages[1], "can do it though.")
 
+    def test_long_message_3_splits(self):
+        msg = "This is a string that will be split 3 ways. This is a string that will be split 3 ways. This is a string that will be split 3 ways. This is a string that will be split 3 ways. This is a string that will be split 3 ways. This is a string that will be split 3 ways. This is a string that will be split 3 ways. This is a string that will be split 3 ways. This is a string that will be split 3 ways."
+        split_messages = self._get_split_messages(msg)
+        self.assertEqual(len(split_messages), 3)
+        self.assertEqual(split_messages[0], "This is a string that will be split 3 ways. This is a string that will be split 3 ways. This is a string that will be split 3 ways. This is ")
+        self.assertEqual(split_messages[1], "a string that will be split 3 ways. This is a string that will be split 3 ways. This is a string that will be split 3 ways. This is a string")
+        self.assertEqual(split_messages[2], "that will be split 3 ways. This is a string that will be split 3 ways. This is a string that will be split 3 ways.")
+    
+    def test_zero_length_message(self):
+        msg = ""
+        split_messages = self._get_split_messages(msg)
+        self.assertEqual(len(split_messages), 1)
+        self.assertEqual(split_messages[0], "")
 
 
 if __name__ == '__main__':
