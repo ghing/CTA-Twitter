@@ -60,30 +60,36 @@ class TwitterBot(object):
     '''A class for a bot processs that will poll a POP server for Twitter e-mails and respond to them''' 
 
     def __init__(self, config, logger):
-        self._server = POP3(config.get('pop', 'hostname'))
+        self._config = config
         self._messages = []
         self._logger = logger
         self._twitter_username = config.get('twitter', 'username')
         self._api = twitter.Api(username=self._twitter_username, \
                                 password=config.get('twitter', 'password'))
 
-        # Authenticate to the POP server
-        self._server.getwelcome()
-        self._server.user(config.get('pop', 'username'))
-        self._server.pass_(config.get('pop', 'password'))
 
     def get_messages(self):
-        messages_info = self._server.list()[1]
+        server = POP3(self._config.get('pop', 'hostname'))
+
+        # Authenticate to the POP server
+        server.getwelcome()
+        server.user(self._config.get('pop', 'username'))
+        server.pass_(self._config.get('pop', 'password'))
+
+        messages_info = server.list()[1]
+
 
         # Get the messages
         for message_info in messages_info: 
           message_num = int(split(message_info, " ")[0])
           message_size = int(split(message_info, " ")[1])
           if (message_size < 20000):
-            message = self._server.retr(message_num)[1]
+            message = server.retr(message_num)[1]
             message = join(message, "\n")
             self._messages.append(message)
           #server.dele(message_num) # Remove message from server.
+
+        server.quit()
 
     def parse_messages(self):
         parser = Parser()
@@ -95,7 +101,7 @@ class TwitterBot(object):
         pass
 
     def __del__(self):
-        self._server.quit()
+        pass
 
 class CtaTwitterBot(TwitterBot):
 
