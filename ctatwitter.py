@@ -236,16 +236,16 @@ class CtaTwitterBot(TwitterBot):
                     #X-Twittersenderscreenname: geoffhing
                     #X-Twitterrecipientname: CTA Bus Tracker
 
-                    # TODO: See if we can parse the message directly from the e-mail.
                     # Assume direct message is the first line of the e-mail body.
                     # From my tests it appears to be
                     direct_message = message_body.splitlines()[0]
                     # logger.debug(direct_message)
 
-                    # TODO: Implement direct message handling
                     message_parser = BusTrackerMessageParser(self._logger) 
                     response  = message_parser.get_response(direct_message) 
-                    self._api.PostDirectMessage(message['X-Twittersenderscreenname'], response)
+                    response_message = shortmessage.ShortMessage(response)
+                    for response_direct_message in response_message.split():
+                      self._api.PostDirectMessage(message['X-Twittersenderscreenname'], response_direct_message)
 
                 # Everything we wanted to do worked, so log the message so we don't repeat
                 # these actions in the future
@@ -270,7 +270,7 @@ def main():
     # Parse command line options
     config_file = 'ctatwitter.conf'
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "f:", ["file="])
+        opts, args = getopt.getopt(sys.argv[1:], "f:c:", ["file=", "command="])
     except getopt.GetoptError, err:
         print str(err)
         sys.exit(2)
@@ -278,6 +278,8 @@ def main():
     for o, a in opts:
         if o in ("-f", "--file"):
             config_file = a
+        if o in ("-c", "--command"):
+            command = a
         else:
             assert False, "unhandled option"
 
@@ -285,9 +287,18 @@ def main():
     config = ConfigParser.ConfigParser()
     config.read(config_file)
 
-    bot = CtaTwitterBot(config, logger)
-    bot.get_messages()
-    bot.parse_messages()
+    if not command:
+        # No command passed on the command line.  Attempt to check messages in e-mail.
+        bot = CtaTwitterBot(config, logger)
+        bot.get_messages()
+        bot.parse_messages()
+    else:
+        message_parser = BusTrackerMessageParser() 
+        response  = message_parser.get_response(direct_message) 
+        response_message = shortmessage.ShortMessage(response)
+        for response_direct_message in response_message.split():
+            print response_direct_message
+        
 
 if __name__ ==  "__main__":
     main()
