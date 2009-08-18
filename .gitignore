@@ -1,4 +1,5 @@
 ctatwitter.conf
+ctatwitter.log
 *.db
 *.swp
 *.pyc

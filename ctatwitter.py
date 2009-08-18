@@ -104,13 +104,16 @@ class TwitterBot(object):
             server.login(self._config.get('imap', 'username'),
                          self._config.get('imap', 'password'))
             server.select('INBOX')             
-            type, data = server.search(None, 'ALL')
+            type, data = server.search(None, 'NOT', 'DELETED')
             for num in data[0].split():
               typ, data = server.fetch(num, '(RFC822)')
               #self._logger.debug('Message %s\n%s\n' % (num, data[0][1]))
               self._messages.append(data[0][1])
+              server.copy(num, self._config.get('imap', 'backup_mailbox'))
+              server.store(num, 'FLAGS', '(\Deleted)')
 
-            # TODO: move message to the seen folder  
+            # QUESTION: Should we expunge deleted messages?
+            # server.expunge()
             server.close()
             server.logout()
 
@@ -269,6 +272,7 @@ def main():
 
     # Parse command line options
     config_file = 'ctatwitter.conf'
+    command = None
     try:
         opts, args = getopt.getopt(sys.argv[1:], "f:c:", ["file=", "command="])
     except getopt.GetoptError, err:
