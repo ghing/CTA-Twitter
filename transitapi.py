@@ -1,4 +1,5 @@
 import urllib2
+import xml.dom.minidom
 
 class Bustracker(object):
     def routeDirectionStopAsXML(self, route, direction):
@@ -16,6 +17,16 @@ class Bustracker(object):
 	          print "HTTP error: %d" % e.code
         except urllib2.URLError, e:
 	          print "Network error: %s" % e.reason.args[1]
+
+        dom = xml.dom.minidom.parseString(data)
+        stops = ()
+        for stop_element in dom.getElementsByTagName('stop'):
+            # TODO: Finish implementing this!  It doesn't work.
+            # BOOKMARK
+            stop = ()
+            stop_element.getAttribute('id')
+            stop_element.getAttribute('name')
+            stop_element.getAttribute('x')
 
     def getStopPredictions(self, stop, route):
         # Example Request: http://chicago.transitapi.com/bustime/map/getStopPredictions.jsp?stop=8207&route=49
