@@ -24,6 +24,9 @@ import shortmessage
 class BusTrackerMessageParser(object):
     """Class to encapsulate parsing messages and returning a response."""
 
+    def __init__(self, logger):
+        self._logger = logger
+
     def get_response(self, msg):
         # Split the message into tokens
         msg_tokens = msg.split()
@@ -33,16 +36,16 @@ class BusTrackerMessageParser(object):
             pass
         elif (msg_tokens[0].isdigit()):
             # First token is a number, interpret it as a bus line
-            if (msg.tokens[1] == 'stops' or msg.tokens[1] == 's'):
+            if len(msg_tokens) == 3 and (msg_tokens[1] == 'stops' or msg_tokens[1] == 's'):
                 # List stops
 
-                if msg.tokens[2]:
+                if msg_tokens[2]:
                     # There's more info, list only the stops matching the remaining tokens 
                     # TODO: Figure out algorithm for intelligently matching strings to stops
                     pass
-            else:
+            elif len(msg_tokens) == 3:
                 # Entered the name or id of a stop, try to get next busses.
-                if (msg.tokens[1].isdigit()):
+                if (msg_tokens[1].isdigit()):
                     # Numeric value, interpret this as a stop ID
                     pass
                 else:
@@ -50,6 +53,9 @@ class BusTrackerMessageParser(object):
                     pass
 
                 # Search for the upcoming busses
+            else:
+                # fail
+                pass
 
         # For now, just send an auto-Threply
         response = "This doesn't do much yet.  See tinyurl.com/ctatwit for updates."
@@ -69,27 +75,44 @@ class TwitterBot(object):
 
 
     def get_messages(self):
-        server = POP3(self._config.get('pop', 'hostname'))
+        if self._config.get('general', 'mail_protocol') == 'pop': 
+            server = POP3(self._config.get('pop', 'hostname'))
 
-        # Authenticate to the POP server
-        server.getwelcome()
-        server.user(self._config.get('pop', 'username'))
-        server.pass_(self._config.get('pop', 'password'))
+            # Authenticate to the POP server
+            server.getwelcome()
+            server.user(self._config.get('pop', 'username'))
+            server.pass_(self._config.get('pop', 'password'))
 
-        messages_info = server.list()[1]
+            messages_info = server.list()[1]
 
 
-        # Get the messages
-        for message_info in messages_info: 
-          message_num = int(split(message_info, " ")[0])
-          message_size = int(split(message_info, " ")[1])
-          if (message_size < 20000):
-            message = server.retr(message_num)[1]
-            message = join(message, "\n")
-            self._messages.append(message)
-          #server.dele(message_num) # Remove message from server.
+            # Get the messages
+            for message_info in messages_info: 
+              message_num = int(split(message_info, " ")[0])
+              message_size = int(split(message_info, " ")[1])
+              if (message_size < 20000):
+                message = server.retr(message_num)[1]
+                message = join(message, "\n")
+                self._messages.append(message)
+              #server.dele(message_num) # Remove message from server.
 
-        server.quit()
+            server.quit()
+        else:
+            # Default to IMAP
+            import imaplib
+            server = imaplib.IMAP4(self._config.get('imap', 'hostname'))
+            server.login(self._config.get('imap', 'username'),
+                         self._config.get('imap', 'password'))
+            server.select('INBOX')             
+            type, data = server.search(None, 'ALL')
+            for num in data[0].split():
+              typ, data = server.fetch(num, '(RFC822)')
+              #self._logger.debug('Message %s\n%s\n' % (num, data[0][1]))
+              self._messages.append(data[0][1])
+
+            # TODO: move message to the seen folder  
+            server.close()
+            server.logout()
 
     def parse_messages(self):
         parser = Parser()
@@ -220,7 +243,7 @@ class CtaTwitterBot(TwitterBot):
                     # logger.debug(direct_message)
 
                     # TODO: Implement direct message handling
-                    message_parser = BusTrackerMessageParser() 
+                    message_parser = BusTrackerMessageParser(self._logger) 
                     response  = message_parser.get_response(direct_message) 
                     self._api.PostDirectMessage(message['X-Twittersenderscreenname'], response)
 
