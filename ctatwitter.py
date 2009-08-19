@@ -49,38 +49,37 @@ class BusTrackerMessageParser(object):
                        "See http://tinyurl.com/ctatwit for more."
 
         elif (msg_tokens[0].isdigit()):
+            # First token is a number, interpret it as a bus route 
             route = msg_tokens[0]
+
             direction = None
-            stop_name = None
             stop_id = None
-            # BOOKMARK
-            
-            # First token is a number, interpret it as a bus line
-            if len(msg_tokens) == 3 and (msg_tokens[1] == 'stops' or msg_tokens[1] == 's'):
+
+            if len(msg_tokens) < 3:
+                raise CommandNotUnderstoodException("Command is incomplete.")
+
+            direction = msg_tokens[1].tolower()[0]
+            if direction not in ('n', 's', 'e', 'w'):
+                raise CommandNotUnderstoodException("Missing direction.")
+
+            if msg_tokens[2] == 'stops' or msg_tokens[2] == 's':
                 # List stops
 
-                if msg_tokens[2]:
-                    # There's more info, list only the stops matching the remaining tokens 
-                    # TODO: Figure out algorithm for intelligently matching strings to stops
-                    pass
-            elif len(msg_tokens) == 3:
-                # Entered the name or id of a stop, try to get next busses.
-                if (msg_tokens[1].isdigit()):
-                    # Numeric value, interpret this as a stop ID
-                    pass
-                else:
-                    # Textual value, try to search for a stop that matches
-                    pass
+                # TODO: Add support for showing only stops matching string
+                response = "Stop listing is not yet implemented. Check http://tinyurl.com/ctatwit for updates."
+            elif len(msg_tokens) == 3 and msg_tokens[2].isdigit():
+                # Entered the id of a stop, try to get next busses.
 
-                # Search for the upcoming busses
+                # TODO: Search for the upcoming busses
+                response = "Arrival times not yet implemented. Check http://tinyurl.com/ctatwit for updates."
             else:
-                # fail
-                pass
+                # General fail
+                raise CommandNotUnderstoodException("Invalid command.")
 
-        # For now, just send an auto-Threply
-        response = "This doesn't do much yet.  See tinyurl.com/ctatwit for updates."
+        else:
+            raise CommandNotUnderstoodException("First part of the command must be 'h(elp)' or a route #")
+
         return response
-
 
 class TwitterBot(object):
     '''A class for a bot processs that will poll a POP server for Twitter e-mails and respond to them''' 
