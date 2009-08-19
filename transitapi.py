@@ -1,5 +1,6 @@
 import urllib2
 import xml.dom.minidom
+import xml.sax.saxutils
 
 class Bustracker(object):
     def routeDirectionStopAsXML(self, route, direction):
@@ -18,10 +19,10 @@ class Bustracker(object):
 	    print "Network error: %s" % e.reason.args[1]
 
         dom = xml.dom.minidom.parseString(data)
-        stops = {}
+        stops = [] 
         for stop_element in dom.getElementsByTagName('stop'):
             id = stop_element.getAttribute('id')
-            name = stop_element.getAttribute('name')
+            name = xml.sax.saxutils.unescape(stop_element.getAttribute('name'))
             x = stop_element.getAttribute('x')
             y = stop_element.getAttribute('y')
             stop = { \
@@ -30,7 +31,7 @@ class Bustracker(object):
                    'x' : x,
                    'y' : y 
                    }
-            stops[id] = stop
+            stops.append(stop)
 
         return stops
             
@@ -59,7 +60,10 @@ class Bustracker(object):
         pass
 
 def main():
-    pass
+    bt = Bustracker()
+    stops = bt.routeDirectionStopAsXML('77', 'west bound')
+    for stop in stops:
+        print stop['name']
 
 if __name__ ==  "__main__":
     main()
