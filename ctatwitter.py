@@ -1,26 +1,35 @@
 #!/usr/bin/python
 
+import twitter
+import sqlite3
 import getopt, sys
 from poplib import *
 import os
 from email.Parser import Parser
 from string import *
-import sqlite3 
 import ConfigParser
 import logging
-import twitter
 import shortmessage
+
+class BusTrackerMessageParserException(Exception):
+    """Base class for exceptions raised by BusTrackerMessageParser"""
+    pass
+
+class CommandNotUnderstoodException(BusTrackerMessageParserException):
+    """Exception raised when there is some problem with the command syntax"""
+    pass           
 
 # NOTE: This is the command syntax:
 # 
-# help: Outputs help message
+# help|h: Outputs help message
 #
-# <bus_line_number> stops|s (<stop_name>): List stops and stop IDs
-# Example: "2 stops Stony Island" lists all #2 bus stops that have Stony Island in the name
+# <bus_line_number> <direction> stops|s (<stop_name>): List stops and stop IDs as they appear in their route
+# Example: "2 n s" lists all northbound # bus stops
+# Example: "2 n s Stony Island" lists all northbound #2 bus stops that have Stony Island in the n
 #
-# <bus_line_number> <stop_id>|<stop_name>: List next busses
-# Example: "2 10487" gets the next busses for stop with stop ID 10487
-# Example: "2 Stony Island" gets the next busses for all stops with Stony Island in the name
+# <bus_line_number> <stop_id>|<stop_name> <direction>: List next busses
+# Example: "2 n 10487" gets the next northbound busses for stop with stop ID 10487
+# Example: "2 n Stony Island" gets the next northbound busses for all stops with Stony Island in the name
 class BusTrackerMessageParser(object):
     """Class to encapsulate parsing messages and returning a response."""
 
@@ -30,6 +39,9 @@ class BusTrackerMessageParser(object):
     def get_response(self, msg):
         # Split the message into tokens
         msg_tokens = msg.split()
+
+        if len(msg_tokens) < 1:
+            raise CommandNotUnderstoodException('Your request is empty!')
         
         if (msg_tokens[0] == 'help' or msg_tokens[0] == 'h'):
             # TODO: Implement help message
@@ -146,6 +158,17 @@ class CtaTwitterBot(TwitterBot):
         else:
             cursor.close()
             return False
+    
+    def _db_log_error_message(self, message, type, error):
+        cursor = self._conn.cursor() 
+        # TODO: Implement this database structure
+        cursor.execute("INSERT INTO direct_message_errors(directmessageid, error_message) values (?, ?, ?)", \
+                       [ \
+                       message['X-Twitterdirectmessageid'], \
+                       error
+                       ])
+        self._conn.commit()
+        cursor.close()
 
     def _db_log_message(self, message, direct_message):        
         cursor = self._conn.cursor() 
@@ -245,7 +268,12 @@ class CtaTwitterBot(TwitterBot):
                     # logger.debug(direct_message)
 
                     message_parser = BusTrackerMessageParser(self._logger) 
-                    response  = message_parser.get_response(direct_message) 
+                    try:
+                        response  = message_parser.get_response(direct_message)
+                    except CommandNotUnderstoodException as e: 
+                        response = "I couldn't understand your request!  Try messaging me with 'help' or see http://tinyurl.com/ctatwit"
+                        self._db_log_error_message(message, e)
+                        
                     response_message = shortmessage.ShortMessage(response)
                     for response_direct_message in response_message.split():
                       self._api.PostDirectMessage(message['X-Twittersenderscreenname'], response_direct_message)
