@@ -49,6 +49,12 @@ class BusTrackerMessageParser(object):
                        "See http://tinyurl.com/ctatwit for more."
 
         elif (msg_tokens[0].isdigit()):
+            route = msg_tokens[0]
+            direction = None
+            stop_name = None
+            stop_id = None
+            # BOOKMARK
+            
             # First token is a number, interpret it as a bus line
             if len(msg_tokens) == 3 and (msg_tokens[1] == 'stops' or msg_tokens[1] == 's'):
                 # List stops
