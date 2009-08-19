@@ -44,8 +44,10 @@ class BusTrackerMessageParser(object):
             raise CommandNotUnderstoodException('Your request is empty!')
         
         if (msg_tokens[0] == 'help' or msg_tokens[0] == 'h'):
-            # TODO: Implement help message
-            pass
+            response = "List stops and their ids: <route #> <direction> s\n" + 
+                       "Get next busses: <route #> <direction> <stop id>\n" +
+                       "See http://tinyurl.com/ctatwit for more."
+
         elif (msg_tokens[0].isdigit()):
             # First token is a number, interpret it as a bus line
             if len(msg_tokens) == 3 and (msg_tokens[1] == 'stops' or msg_tokens[1] == 's'):
