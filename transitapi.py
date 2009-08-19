@@ -8,26 +8,32 @@ class Bustracker(object):
         # <stop-list>
         #     <stop id="4725" name="Congress &amp; Michigan" x="1177445.262119" y="1898166.05272"/>
         #     <stop id="17255" name="Congress &amp; Wabash" x="1176787.68965" y="1898138.579471"/>
-        # TODO: Need to escape direction
-        url = "http://chicago.transitapi.com/bustime/eta/routeDirectionStopAsXML.jsp?route=%s&direction=%s" % (route, direction)
+        url = "http://chicago.transitapi.com/bustime/eta/routeDirectionStopAsXML.jsp?route=%s&direction=%s" % (route, urllib2.quote(direction))
 
         try:
-	          data = urllib2.urlopen(url).read()
+            data = urllib2.urlopen(url).read()
         except urllib2.HTTPError, e:
-	          print "HTTP error: %d" % e.code
+	    print "HTTP error: %d" % e.code
         except urllib2.URLError, e:
-	          print "Network error: %s" % e.reason.args[1]
+	    print "Network error: %s" % e.reason.args[1]
 
         dom = xml.dom.minidom.parseString(data)
-        stops = ()
+        stops = {}
         for stop_element in dom.getElementsByTagName('stop'):
-            # TODO: Finish implementing this!  It doesn't work.
-            # BOOKMARK
-            stop = ()
-            stop_element.getAttribute('id')
-            stop_element.getAttribute('name')
-            stop_element.getAttribute('x')
+            id = stop_element.getAttribute('id')
+            name = stop_element.getAttribute('name')
+            x = stop_element.getAttribute('x')
+            y = stop_element.getAttribute('y')
+            stop = { \
+                   'id' : id, 
+                   'name' : name, 
+                   'x' : x,
+                   'y' : y 
+                   }
+            stops[id] = stop
 
+        return stops
+            
     def getStopPredictions(self, stop, route):
         # Example Request: http://chicago.transitapi.com/bustime/map/getStopPredictions.jsp?stop=8207&route=49
         # Notes: route can be stacked. ie: route=50-92. which would give you stop predictions for stops that have both foster and damen.
@@ -51,3 +57,9 @@ class Bustracker(object):
         #     </pre>
         # </stop>
         pass
+
+def main():
+    pass
+
+if __name__ ==  "__main__":
+    main()
