@@ -65,8 +65,8 @@ class BusTrackerMessageParser(object):
             if msg_tokens[2] == 'stops' or msg_tokens[2] == 's':
                 # List stops
 
-                # TODO: Add support for showing only stops matching string
                 response = "Stop listing is not yet implemented. Check http://tinyurl.com/ctatwit for updates."
+                # TODO: Add support for showing only stops matching string
             elif len(msg_tokens) == 3 and msg_tokens[2].isdigit():
                 # Entered the id of a stop, try to get next busses.
 
@@ -168,7 +168,6 @@ class CtaTwitterBot(TwitterBot):
     
     def _db_log_error_message(self, message, type, error):
         cursor = self._conn.cursor() 
-        # TODO: Implement this database structure
         cursor.execute("INSERT INTO direct_message_errors(directmessageid, error_message) values (?, ?, ?)", \
                        [ \
                        message['X-Twitterdirectmessageid'], \
