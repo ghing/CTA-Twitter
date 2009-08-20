@@ -44,8 +44,8 @@ class BusTrackerMessageParser(object):
             raise CommandNotUnderstoodException('Your request is empty!')
         
         if (msg_tokens[0] == 'help' or msg_tokens[0] == 'h'):
-            response = "List stops and their ids: <route #> <direction> s\n" + 
-                       "Get next busses: <route #> <direction> <stop id>\n" +
+            response = "List stops and their ids: <route #> <direction> s\n" + \
+                       "Get next busses: <route #> <direction> <stop id>\n" + \
                        "See http://tinyurl.com/ctatwit for more."
 
         elif (msg_tokens[0].isdigit()):
@@ -276,9 +276,9 @@ class CtaTwitterBot(TwitterBot):
                     message_parser = BusTrackerMessageParser(self._logger) 
                     try:
                         response  = message_parser.get_response(direct_message)
-                    except CommandNotUnderstoodException as e: 
+                    except CommandNotUnderstoodException, err: 
                         response = "I couldn't understand your request!  Try messaging me with 'help' or see http://tinyurl.com/ctatwit"
-                        self._db_log_error_message(message, e)
+                        self._db_log_error_message(message, err)
                         
                     response_message = shortmessage.ShortMessage(response)
                     for response_direct_message in response_message.split():
@@ -331,10 +331,10 @@ def main():
         bot.get_messages()
         bot.parse_messages()
     else:
-        message_parser = BusTrackerMessageParser() 
-        response  = message_parser.get_response(direct_message) 
+        message_parser = BusTrackerMessageParser(logger) 
+        response  = message_parser.get_response(command) 
         response_message = shortmessage.ShortMessage(response)
-        for response_direct_message in response_message.split():
+        for response_direct_message in response_message.split(140):
             print response_direct_message
         
 
