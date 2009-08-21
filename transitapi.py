@@ -32,6 +32,11 @@ class Point(object):
     def set_stop(self, stop):
         self.stop = stop
 
+# Base exception class for exceptions raised by Bustracker methods
+class BustrackerException:
+    pass
+
+# TODO: Lazily catch and log XML and urllib exceptions so I can find bugs
 
 class Bustracker(object):
     def getRoutePoints(self, route):
