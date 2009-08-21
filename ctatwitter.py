@@ -34,6 +34,12 @@ class CommandNotUnderstoodException(BusTrackerMessageParserException):
 class BusTrackerMessageParser(object):
     """Class to encapsulate parsing messages and returning a response."""
 
+    # Insert this into the response to force the message to be broken at that
+    # point by ShortMessage.split().  The default is to split messages at
+    # whitespace, but in some cases, for readability, we might want to force
+    # a split elsewhere (for example, keeping stop names and IDs together)
+    MESSAGE_TOKEN_SEP = "-;;-" 
+
     def __init__(self, logger):
         self._logger = logger
 
@@ -81,7 +87,7 @@ class BusTrackerMessageParser(object):
                 stops = bt.getRouteDirectionStops(route, direction_arg)
                 for stop in stops:
                     # TODO: Figure out how to shorten this output
-                    response += "%s:%s;" % (stop.id, stop.name)
+                    response += "%s:%s;" % (stop.id, stop.name) + self.MESSAGE_TOKEN_SEP
 
                 # TODO: Add support for showing only stops matching string
             elif len(msg_tokens) == 3 and msg_tokens[2].isdigit():
@@ -296,9 +302,14 @@ class CtaTwitterBot(TwitterBot):
                     except CommandNotUnderstoodException, err: 
                         response = "I couldn't understand your request!  Try messaging me with 'help' or see http://tinyurl.com/ctatwit"
                         self._db_log_error_message(message, err)
-                        
+
+                    if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
+                        sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
+                    else
+                        sep = None
+                       
                     response_message = shortmessage.ShortMessage(response)
-                    for response_direct_message in response_message.split():
+                    for response_direct_message in response_message.split(sep):
                       self._api.PostDirectMessage(message['X-Twittersenderscreenname'], response_direct_message)
 
                 # Everything we wanted to do worked, so log the message so we don't repeat
@@ -350,8 +361,12 @@ def main():
     else:
         message_parser = BusTrackerMessageParser(logger) 
         response  = message_parser.get_response(command) 
+        if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
+            sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
+        else
+            sep = None
         response_message = shortmessage.ShortMessage(response)
-        for response_direct_message in response_message.split(140, ';'):
+        for response_direct_message in response_message.split(140, sep):
             print response_direct_message
         
 
