@@ -80,7 +80,7 @@ class BusTrackerMessageParser(object):
                 bt = transitapi.Bustracker()
                 stops = bt.getRouteDirectionStops(route, direction_arg)
                 for stop in stops:
-                    # Figure out how to shorten this output
+                    # TODO: Figure out how to shorten this output
                     response += "%s:%s;" % (stop.id, stop.name)
 
                 # TODO: Add support for showing only stops matching string
