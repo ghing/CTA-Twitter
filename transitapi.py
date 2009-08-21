@@ -10,8 +10,7 @@ def get_text(nodelist):
     return rc
 
 class Stop(object):
-    # TODO: Figure out how to set default arguments
-    def __init__(self, name, id, x, y):
+    def __init__(self, name, id, x=None, y=None):
         self.name = name
         self.id = id
         self.x = x
@@ -52,9 +51,7 @@ class Bustracker(object):
                 if bs_elements:
                   bs_element = bs_elements[0]
                   id = get_text(bs_element.getElementsByTagName('id')[0].childNodes)
-                  # BOOKMARK
-                  # TODO: This isn't working
-                  name =  get_text(bs_element.getElementsByTagName('st')[0].childNodes)
+                  name =  bs_element.getElementsByTagName('st')[0].firstChild.wholeText
                   point.set_stop(Stop(name, id)) 
 
                 points[direction].append(point)        
@@ -131,8 +128,9 @@ def main():
 
     points = bt.getRoutePoints('77')
     for point in points['East Bound']:
-        if 'bs' in point.keys():
-          print point['bs']
+        if point.stop:
+          print "%s:%s" % (point.stop.id, point.stop.name)
+
 
 
 if __name__ ==  "__main__":
