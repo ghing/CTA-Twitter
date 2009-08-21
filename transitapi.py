@@ -9,6 +9,24 @@ def get_text(nodelist):
             rc = rc + node.data
     return rc
 
+class Stop(object):
+    # TODO: Figure out how to set default arguments
+    def __init__(self, name, id, x, y):
+        self.name = name
+        self.id = id
+        self.x = x
+        self.y = y
+
+class Point(object):
+    def __init__(self, lat, lon):
+        self.lat = lat
+        self.lon = lon
+        self.stop = None
+
+    def set_stop(self, stop):
+        self.stop = stop
+
+
 class Bustracker(object):
     def getRoutePoints(self, route):
         url = "http://chicago.transitapi.com/bustime/map/getRoutePoints.jsp?route=%s" % (route)
@@ -16,9 +34,9 @@ class Bustracker(object):
         try:
             data = urllib2.urlopen(url).read()
         except urllib2.HTTPError, e:
-	    print "HTTP error: %d" % e.code
+            print "HTTP error: %d" % e.code
         except urllib2.URLError, e:
-	    print "Network error: %s" % e.reason.args[1]
+            print "Network error: %s" % e.reason.args[1]
 
         dom = xml.dom.minidom.parseString(data)
         points = {} 
@@ -28,26 +46,21 @@ class Bustracker(object):
             for point_element in pa_element.getElementsByTagName('pt'):
                 lat = get_text(point_element.getElementsByTagName('lat')[0].childNodes)
                 lon = get_text(point_element.getElementsByTagName('lon')[0].childNodes)
-                point = { \
-                         'lat' : lat,
-                         'lon' : lon,
-                        } 
+                point = Point(lat, lon)
+                
                 bs_elements = point_element.getElementsByTagName('bs')
                 if bs_elements:
                   bs_element = bs_elements[0]
                   id = get_text(bs_element.getElementsByTagName('id')[0].childNodes)
                   # BOOKMARK
                   # TODO: This isn't working
-                  st =  get_text(bs_element.getElementsByTagName('st')[0].childNodes)
-                  bs = { \
-                        'id' : id,
-                        'st' : st
-                       }
-                  point['bs'] = bs    
+                  name =  get_text(bs_element.getElementsByTagName('st')[0].childNodes)
+                  point.set_stop(Stop(name, id)) 
 
                 points[direction].append(point)        
 
         return points
+        
 
     def routeDirectionStopAsXML(self, route, direction):
         # Example Request:http://chicago.transitapi.com/bustime/eta/routeDirectionStopAsXML.jsp?route=147&direction=north%20bound
@@ -71,12 +84,7 @@ class Bustracker(object):
             name = xml.sax.saxutils.unescape(stop_element.getAttribute('name'))
             x = stop_element.getAttribute('x')
             y = stop_element.getAttribute('y')
-            stop = { \
-                   'id' : id, 
-                   'name' : name, 
-                   'x' : x,
-                   'y' : y 
-                   }
+            stop = Stop(name, id, x, y)
             stops.append(stop)
 
         return stops
