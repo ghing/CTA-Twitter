@@ -10,6 +10,7 @@ from string import *
 import ConfigParser
 import logging
 import shortmessage
+import transitapi
 
 class BusTrackerMessageParserException(Exception):
     """Base class for exceptions raised by BusTrackerMessageParser"""
@@ -58,14 +59,30 @@ class BusTrackerMessageParser(object):
             if len(msg_tokens) < 3:
                 raise CommandNotUnderstoodException("Command is incomplete.")
 
-            direction = msg_tokens[1].tolower()[0]
+            direction = msg_tokens[1].lower()[0]
             if direction not in ('n', 's', 'e', 'w'):
                 raise CommandNotUnderstoodException("Missing direction.")
 
             if msg_tokens[2] == 'stops' or msg_tokens[2] == 's':
                 # List stops
 
-                response = "Stop listing is not yet implemented. Check http://tinyurl.com/ctatwit for updates."
+                #response = "Stop listing is not yet implemented. Check http://tinyurl.com/ctatwit for updates."
+                response = "Stops (ID:Name): "
+                if direction == "n":
+                   direction_arg = "North Bound"
+                elif direction == "s":
+                   direction_arg = "South Bound"
+                elif direction =="e":
+                   direction_arg = "East Bound"
+                elif direction =="w":
+                   direction_arg = "West Bound"
+
+                bt = transitapi.Bustracker()
+                stops = bt.getRouteDirectionStops(route, direction_arg)
+                for stop in stops:
+                    # Figure out how to shorten this output
+                    response += "%s:%s;" % (stop.id, stop.name)
+
                 # TODO: Add support for showing only stops matching string
             elif len(msg_tokens) == 3 and msg_tokens[2].isdigit():
                 # Entered the id of a stop, try to get next busses.
@@ -334,7 +351,7 @@ def main():
         message_parser = BusTrackerMessageParser(logger) 
         response  = message_parser.get_response(command) 
         response_message = shortmessage.ShortMessage(response)
-        for response_direct_message in response_message.split(140):
+        for response_direct_message in response_message.split(140, ';'):
             print response_direct_message
         
 
