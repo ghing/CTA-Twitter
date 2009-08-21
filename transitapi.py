@@ -62,6 +62,15 @@ class Bustracker(object):
         return points
         
 
+    def getRouteDirectionStops(self, route, direction):
+        """Get the stops for a given direction in the order that they are passed on the route."""
+        stops = []
+        points = getRoutePoints(route)
+        for point in points[direction]:
+            stops.append(point.stop)
+
+        return stops
+
     def routeDirectionStopAsXML(self, route, direction):
         # Example Request:http://chicago.transitapi.com/bustime/eta/routeDirectionStopAsXML.jsp?route=147&direction=north%20bound
         # Example response:
