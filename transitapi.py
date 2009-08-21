@@ -16,6 +16,13 @@ class Stop(object):
         self.x = x
         self.y = y
 
+    def __str__(self):
+        s = "%s : %s" % (self.id, self.name)
+        if self.x and self.y:
+            s += " (%s, %s)" % (self.x, self.y)
+      
+        return s
+
 class Point(object):
     def __init__(self, lat, lon):
         self.lat = lat
@@ -62,9 +69,10 @@ class Bustracker(object):
     def getRouteDirectionStops(self, route, direction):
         """Get the stops for a given direction in the order that they are passed on the route."""
         stops = []
-        points = getRoutePoints(route)
+        points = self.getRoutePoints(route)
         for point in points[direction]:
-            stops.append(point.stop)
+            if point.stop:
+              stops.append(point.stop)
 
         return stops
 
@@ -126,10 +134,14 @@ def main():
     #for stop in stops:
     #    print stop['name']
 
-    points = bt.getRoutePoints('77')
-    for point in points['East Bound']:
-        if point.stop:
-          print "%s:%s" % (point.stop.id, point.stop.name)
+    #points = bt.getRoutePoints('77')
+    #for point in points['East Bound']:
+    #    if point.stop:
+    #      print "%s:%s" % (point.stop.id, point.stop.name)
+
+    stops = bt.getRouteDirectionStops(2, 'North Bound')
+    for stop in stops:
+        print stop
 
 
 
