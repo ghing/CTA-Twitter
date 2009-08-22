@@ -305,7 +305,7 @@ class CtaTwitterBot(TwitterBot):
 
                     if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
                         sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
-                    else
+                    else:
                         sep = None
                        
                     response_message = shortmessage.ShortMessage(response)
@@ -363,7 +363,7 @@ def main():
         response  = message_parser.get_response(command) 
         if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
             sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
-        else
+        else:
             sep = None
         response_message = shortmessage.ShortMessage(response)
         for response_direct_message in response_message.split(140, sep):
