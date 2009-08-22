@@ -36,7 +36,7 @@ class Point(object):
 class BustrackerException:
     pass
 
-# TODO: Lazily catch and log XML and urllib exceptions so I can find bugs
+# TODO: Lazily catch and log XML (KeyError) and urllib exceptions so I can find bugs
 
 class Bustracker(object):
     def getRoutePoints(self, route):
