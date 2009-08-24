@@ -141,10 +141,19 @@ class Bustracker(object):
         return stops
 
     def parse_stop_predictions_xml(self, data):
-        # BOOKMARK
-        # TODO: Implement this
         try:
-            pass
+            dom = xml.dom.minidom.parseString(data)
+            busses = []
+            for pre in dom.getElementByTagName('pre'):
+                # TODO: Figure out what XML is returned when no busses are predicted
+                predicted_time = pre.getElementsByTagName('pt')[0]
+                from_direction = pre.getElementsByTagName('fd')[0].firstChild.wholeText
+                id = pre.getElementsByTagName('v')[0]
+                run = pre.getElementByTagName('rn')[0]
+                bus = PredictedBus(id, run, from_direction, predicted_time)
+                busses.append(bus)
+
+            return busses
         except KeyError, e:
             raise BustrackerApiXmlError("The XML returned by the API didn't parse as expected: %s", e)
             
