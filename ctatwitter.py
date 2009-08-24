@@ -151,7 +151,27 @@ class BusTrackerMessageParser(object):
                 # Entered the id of a stop, try to get next busses.
 
                 # TODO: Search for the upcoming busses
-                response = "Arrival times not yet implemented. Check http://tinyurl.com/ctatwit for updates."
+                try:
+                    bt = transitapi.Bustracker()
+                    predicted_busses = bt.getStopPredictions(stop_id, route, direction)
+                    # BOOKMARK
+                    # TODO: Filter busses by direction
+                    if len(predicted_busses) == 0:
+                        response = "No busses are predicted for this stop."
+                    elif len(predicted_busses) == 1:
+                        response = "Upcoming bus in %s" % bus.predicted_time
+                    else:
+                      response = "Upcoming busses in "
+                      for i in range(0, len(predicted_busses):
+                          response += predicted_busses[i].predicted_time
+                          if i != len(predicted_busses) - 1:
+                              response += ", "
+                except BustrackerApiConnectionError, e:
+                    self._logger.error("Couldn't connect to the API: %s" % e)
+                    response = "I'm having trouble getting bus information from the CTA's system.  Please try again later."
+                except BustrackerApiXmlError, e:
+                    self._logger.error("%s", % e)
+                    response = "Oops.  That didn't go as planned.  I'm looking into it."
             else:
                 # General fail
                 raise CommandNotUnderstoodException("Invalid command.")
