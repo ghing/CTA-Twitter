@@ -32,8 +32,12 @@ class Point(object):
     def set_stop(self, stop):
         self.stop = stop
 
-# Base exception class for exceptions raised by Bustracker methods
 class BustrackerException:
+    """Base exception class for exceptions raised by Bustracker methods"""
+    pass
+
+class BustrackerApiConnectionError:
+    """Exception class for errors raised when connecting to the API"""
     pass
 
 # TODO: Lazily catch and log XML and urllib exceptions so I can find bugs
@@ -45,9 +49,9 @@ class Bustracker(object):
         try:
             data = urllib2.urlopen(url).read()
         except urllib2.HTTPError, e:
-            print "HTTP error: %d" % e.code
+            raise BustrackerApiConnectionError("Http error: %d" % e.code)
         except urllib2.URLError, e:
-            print "Network error: %s" % e.reason.args[1]
+            raise BustrackerApiConnectionError("Network error: %s" % e.reason.args[1])
 
         dom = xml.dom.minidom.parseString(data)
         points = {} 
@@ -92,9 +96,9 @@ class Bustracker(object):
         try:
             data = urllib2.urlopen(url).read()
         except urllib2.HTTPError, e:
-	    print "HTTP error: %d" % e.code
+            raise BustrackerApiConnectionError("Http error: %d" % e.code)
         except urllib2.URLError, e:
-	    print "Network error: %s" % e.reason.args[1]
+            raise BustrackerApiConnectionError("Network error: %s" % e.reason.args[1])
 
         dom = xml.dom.minidom.parseString(data)
         stops = [] 
@@ -111,26 +115,18 @@ class Bustracker(object):
     def getStopPredictions(self, stop, route):
         # Example Request: http://chicago.transitapi.com/bustime/map/getStopPredictions.jsp?stop=8207&route=49
         # Notes: route can be stacked. ie: route=50-92. which would give you stop predictions for stops that have both foster and damen.
-        # Example Response: 
-        # <stop>
-        #     <id>8207</id>
-        #     <nm>Western & Fullerton</nm>
-        #     <sri>
-        #         <rt>49</rt>
-        #         <d>South Bound</d>
-        #     </sri>
-        #     <sbs>
-        #
-			  #     </sbs>
-        #     <cr>49</cr>
-        #     <pre>
-        #         <pt>DELAYED</pt>
-        #         <fd>79th</fd>
-        #         <v>6562</v>
-        #         <rn>49</rn>
-        #     </pre>
-        # </stop>
-        pass
+        url = "http://chicago.transitapi.com/bustime/map/getStopPredictions.jsp?stop=%s&route=%s" % (stop, route)
+
+        try:
+            data = urllib2.urlopen(url).read()
+        except urllib2.HTTPError, e:
+            raise BustrackerApiConnectionError("Http error: %d" % e.code)
+        except urllib2.URLError, e:
+            raise BustrackerApiConnectionError("Network error: %s" % e.reason.args[1])
+
+        busses = self.parse_stop_preditions_xml(data)
+        
+        return busses
 
 def main():
     bt = Bustracker()
