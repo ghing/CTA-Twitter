@@ -11,6 +11,7 @@ import ConfigParser
 import logging
 import shortmessage
 import transitapi
+import re
 
 class BusTrackerMessageParserException(Exception):
     """Base class for exceptions raised by BusTrackerMessageParser"""
@@ -42,6 +43,56 @@ class BusTrackerMessageParser(object):
 
     def __init__(self, logger):
         self._logger = logger
+        self._name_history = []
+
+    def shorten_name(self, name):
+        short_name = ""
+        min_name_len = 3
+ 
+        name_parts = name.split()
+        new_name_parts = []
+        for name_part in name_parts:
+           new_name_part = None
+
+           # Strip street names
+           name_part = name_part.replace('Street', '')
+           name_part = name_part.replace('Drive', '')
+           name_part = name_part.replace('Avenue', '')
+
+           # Abbreviate directions
+           name_part = name_part.replace('East', 'E')
+           name_part = name_part.replace('West', 'W')
+           name_part = name_part.replace('North', 'N')
+           name_part = name_part.replace('South', 'S')
+         
+           if len(name_part) >= min_name_len:
+               #print "'%s'" % (name_part)
+
+               if name_part not in self._name_history:
+                   #print "adding '%s'" % (name_part)
+                   self._name_history.append(name_part)
+               else:
+                   vowel_re = re.compile(r'[AEIOUaeiou]')
+                   new_name_part = vowel_re.sub('', name_part)  
+                   if new_name_part[0] != name_part[0]:
+                       # Got rid of the first letter in the name
+                       # b/c it was a vowel.  We want it back.
+                       new_name_part = name_part[0] + new_name_part
+                   
+                   #print "converted '%s' to '%s'" % (name_part, new_name_part)
+
+           if new_name_part:
+               new_name_parts.append(new_name_part)      
+           else:
+               if not name_part.isspace() and not name_part == '':
+                   new_name_parts.append(name_part)
+
+        return ' '.join(new_name_parts) 
+                
+
+    def flush_name_history(self):
+        del self._name_history
+        self._name_history = []
 
     def get_response(self, msg):
         # Split the message into tokens
@@ -308,7 +359,7 @@ class CtaTwitterBot(TwitterBot):
 
                     if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
                         sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
-                    else
+                    else:
                         sep = None
                        
                     response_message = shortmessage.ShortMessage(response)
@@ -366,7 +417,7 @@ def main():
         response  = message_parser.get_response(command) 
         if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
             sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
-        else
+        else:
             sep = None
         response_message = shortmessage.ShortMessage(response)
         for response_direct_message in response_message.split(140, sep):
