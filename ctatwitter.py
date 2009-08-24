@@ -142,6 +142,9 @@ class BusTrackerMessageParser(object):
                 except BustrackerApiConnectionError, e:
                     self._logger.error("Couldn't connect to the API: %s" % e)
                     response = "I'm having trouble getting bus information from the CTA's system.  Please try again later."
+                except BustrackerApiXmlError, e:
+                    self._logger.error("%s", % e)
+                    response = "Oops.  That didn't go as planned.  I'm looking into it."
                     
                 # TODO: Add support for showing only stops matching string
             elif len(msg_tokens) == 3 and msg_tokens[2].isdigit():

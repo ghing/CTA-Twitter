@@ -40,30 +40,36 @@ class BustrackerApiConnectionError:
     """Exception class for errors raised when connecting to the API"""
     pass
 
+class BustrackerApiXmlError:
+    """Exception class for errors raised when the XML received from the API call isn't parsable as I expected."""
+
 # TODO: Lazily catch and log XML (KeyError) and urllib exceptions so I can find bugs
 
 class Bustracker(object):
     def parse_route_points_xml(self, data):
-        dom = xml.dom.minidom.parseString(data)
-        points = {} 
-        for pa_element in dom.getElementsByTagName('pa'):
-            direction = get_text(pa_element.getElementsByTagName('d')[0].childNodes)
-            points[direction] = []
-            for point_element in pa_element.getElementsByTagName('pt'):
-                lat = get_text(point_element.getElementsByTagName('lat')[0].childNodes)
-                lon = get_text(point_element.getElementsByTagName('lon')[0].childNodes)
-                point = Point(lat, lon)
-                
-                bs_elements = point_element.getElementsByTagName('bs')
-                if bs_elements:
-                  bs_element = bs_elements[0]
-                  id = get_text(bs_element.getElementsByTagName('id')[0].childNodes)
-                  name =  bs_element.getElementsByTagName('st')[0].firstChild.wholeText
-                  point.set_stop(Stop(name, id)) 
+        try:
+            dom = xml.dom.minidom.parseString(data)
+            points = {} 
+            for pa_element in dom.getElementsByTagName('pa'):
+                direction = get_text(pa_element.getElementsByTagName('d')[0].childNodes)
+                points[direction] = []
+                for point_element in pa_element.getElementsByTagName('pt'):
+                    lat = get_text(point_element.getElementsByTagName('lat')[0].childNodes)
+                    lon = get_text(point_element.getElementsByTagName('lon')[0].childNodes)
+                    point = Point(lat, lon)
+                    
+                    bs_elements = point_element.getElementsByTagName('bs')
+                    if bs_elements:
+                      bs_element = bs_elements[0]
+                      id = get_text(bs_element.getElementsByTagName('id')[0].childNodes)
+                      name =  bs_element.getElementsByTagName('st')[0].firstChild.wholeText
+                      point.set_stop(Stop(name, id)) 
 
-                points[direction].append(point)        
+                    points[direction].append(point)        
 
-        return points
+            return points
+        except KeyError, e:
+            raise BustrackerApiXmlError("The XML returned by the API didn't parse as expected: %s", e)
 
     def getRoutePoints(self, route):
         url = "http://chicago.transitapi.com/bustime/map/getRoutePoints.jsp?route=%s" % (route)
@@ -90,17 +96,20 @@ class Bustracker(object):
         return stops
 
     def parse_route_direction_stop_xml(self, data):
-        dom = xml.dom.minidom.parseString(data)
-        stops = [] 
-        for stop_element in dom.getElementsByTagName('stop'):
-            id = stop_element.getAttribute('id')
-            name = xml.sax.saxutils.unescape(stop_element.getAttribute('name'))
-            x = stop_element.getAttribute('x')
-            y = stop_element.getAttribute('y')
-            stop = Stop(name, id, x, y)
-            stops.append(stop)
+        try:
+            dom = xml.dom.minidom.parseString(data)
+            stops = [] 
+            for stop_element in dom.getElementsByTagName('stop'):
+                id = stop_element.getAttribute('id')
+                name = xml.sax.saxutils.unescape(stop_element.getAttribute('name'))
+                x = stop_element.getAttribute('x')
+                y = stop_element.getAttribute('y')
+                stop = Stop(name, id, x, y)
+                stops.append(stop)
 
-        return stops
+            return stops
+        except KeyError, e:
+            raise BustrackerApiXmlError("The XML returned by the API didn't parse as expected: %s", e)
 
 
     def routeDirectionStopAsXML(self, route, direction):
@@ -125,7 +134,10 @@ class Bustracker(object):
     def parse_stop_predictions_xml(self, data):
         # BOOKMARK
         # TODO: Implement this
-        pass
+        try:
+            pass
+        except KeyError, e:
+            raise BustrackerApiXmlError("The XML returned by the API didn't parse as expected: %s", e)
             
     def getStopPredictions(self, stop, route):
         # Example Request: http://chicago.transitapi.com/bustime/map/getStopPredictions.jsp?stop=8207&route=49
