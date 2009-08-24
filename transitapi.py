@@ -32,8 +32,12 @@ class Point(object):
     def set_stop(self, stop):
         self.stop = stop
 
-# Base exception class for exceptions raised by Bustracker methods
 class BustrackerException:
+    """Base exception class for exceptions raised by Bustracker methods"""
+    pass
+
+class BustrackerApiConnectionError:
+    """Exception class for errors raised when connecting to the API"""
     pass
 
 # TODO: Lazily catch and log XML (KeyError) and urllib exceptions so I can find bugs
@@ -67,9 +71,9 @@ class Bustracker(object):
         try:
             data = urllib2.urlopen(url).read()
         except urllib2.HTTPError, e:
-            print "HTTP error: %d" % e.code
+            raise BustrackerApiConnectionError("Http error: %d" % e.code)
         except urllib2.URLError, e:
-            print "Network error: %s" % e.reason.args[1]
+            raise BustrackerApiConnectionError("Network error: %s" % e.reason.args[1])
 
         points = self.parse_route_points_xml(data)
 
@@ -110,9 +114,9 @@ class Bustracker(object):
         try:
             data = urllib2.urlopen(url).read()
         except urllib2.HTTPError, e:
-	    print "HTTP error: %d" % e.code
+            raise BustrackerApiConnectionError("Http error: %d" % e.code)
         except urllib2.URLError, e:
-	    print "Network error: %s" % e.reason.args[1]
+            raise BustrackerApiConnectionError("Network error: %s" % e.reason.args[1])
 
         stops = self.parse_route_direction_stop_xml(data)
 
@@ -126,19 +130,18 @@ class Bustracker(object):
     def getStopPredictions(self, stop, route):
         # Example Request: http://chicago.transitapi.com/bustime/map/getStopPredictions.jsp?stop=8207&route=49
         # Notes: route can be stacked. ie: route=50-92. which would give you stop predictions for stops that have both foster and damen.
-
         url = "http://chicago.transitapi.com/bustime/map/getStopPredictions.jsp?stop=%s&route=%s" % (stop, route)
+
         try:
             data = urllib2.urlopen(url).read()
         except urllib2.HTTPError, e:
-	    print "HTTP error: %d" % e.code
+            raise BustrackerApiConnectionError("Http error: %d" % e.code)
         except urllib2.URLError, e:
-	    print "Network error: %s" % e.reason.args[1]
+            raise BustrackerApiConnectionError("Network error: %s" % e.reason.args[1])
 
+        busses = self.parse_stop_preditions_xml(data)
         
-        buses = self.parse_stop_predictions(data)
-
-        return buses
+        return busses
 
 def main():
     bt = Bustracker()
