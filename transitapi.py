@@ -9,6 +9,17 @@ def get_text(nodelist):
             rc = rc + node.data
     return rc
 
+class Bus(object):
+    def __init__(self, id, run, from_direction):
+        self.id = id
+        self.run = run
+        self.from_direction = from_direction
+
+class PredictedBus(Bus):
+    def __init__(self, id, run, from_direction, predicted_time):
+        Bus.__init__(self, id, run, from_direction)
+        self.predicted_time = predicted_time
+
 class Stop(object):
     def __init__(self, name, id, x=None, y=None):
         self.name = name
