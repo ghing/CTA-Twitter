@@ -83,12 +83,15 @@ class BusTrackerMessageParser(object):
                 elif direction =="w":
                    direction_arg = "West Bound"
 
-                bt = transitapi.Bustracker()
-                stops = bt.getRouteDirectionStops(route, direction_arg)
-                for stop in stops:
-                    # TODO: Figure out how to shorten this output
-                    response += "%s:%s;" % (stop.id, stop.name) + self.MESSAGE_TOKEN_SEP
-
+                try:
+                    bt = transitapi.Bustracker()
+                    stops = bt.getRouteDirectionStops(route, direction_arg)
+                    for stop in stops:
+                        response += "%s:%s;" % (stop.id, stop.name) + self.MESSAGE_TOKEN_SEP
+                except BustrackerApiConnectionError, e:
+                    self._logger.error("Couldn't connect to the API: %s" % e)
+                    response = "I'm having trouble getting bus information from the CTA's system.  Please try again later."
+                    
                 # TODO: Add support for showing only stops matching string
             elif len(msg_tokens) == 3 and msg_tokens[2].isdigit():
                 # Entered the id of a stop, try to get next busses.
