@@ -43,8 +43,6 @@ class BustrackerApiConnectionError:
 class BustrackerApiXmlError:
     """Exception class for errors raised when the XML received from the API call isn't parsable as I expected."""
 
-# TODO: Lazily catch and log XML (KeyError) and urllib exceptions so I can find bugs
-
 class Bustracker(object):
     def parse_route_points_xml(self, data):
         try:
