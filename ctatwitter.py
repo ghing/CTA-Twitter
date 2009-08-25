@@ -154,8 +154,6 @@ class BusTrackerMessageParser(object):
                 try:
                     bt = transitapi.Bustracker()
                     predicted_busses = bt.getStopPredictions(stop_id, route, direction)
-                    # BOOKMARK
-                    # TODO: Filter busses by direction
                     if len(predicted_busses) == 0:
                         response = "No busses are predicted for this stop."
                     elif len(predicted_busses) == 1:
