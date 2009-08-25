@@ -1,0 +1,2754 @@
+<?xml version="1.0"?>
+
+
+
+
+
+
+		<route>
+			<id>77</id>
+			<sn>77</sn>
+			<nm><![CDATA[77]]></nm>
+			<sbs>
+
+					<sb>
+					<nm><![CDATA[#77 Belmont]]></nm>
+					<as><![CDATA[77]]></as>
+					<sbj><![CDATA[Temporary Bus Stop Relocation]]></sbj>
+					<det><![CDATA[Bus Stop Relocation<br><br>The eastbound stop in front of the Belmont station will be relocated to the southwest corner at Belmont/Sheffield.<br><br>The westbound stop will be relocated to the northwest corner at Belmont/Sheffield.<br><br>The bus stop is being relocated due to a street reconstruction project.<br>]]></det>
+					<pr>10</pr>
+					<rt>77</rt>
+					</sb>
+
+			</sbs>
+			<c>#993333</c>
+			<pas>
+
+						<pa>
+							<id>3991</id>
+							<l>55752.0</l>
+							<d>East Bound</d>
+
+								<pt>
+									<lat>41.937275050808</lat>
+			            			<lon>-87.835532426834</lon>
+
+			                		<bs>
+			                			<id>9224</id>
+			                			<st><![CDATA[Belmont & Cumberland Terminal]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937291012673</lat>
+			            			<lon>-87.835360765457</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937470583378</lat>
+			            			<lon>-87.835307121277</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937482554741</lat>
+			            			<lon>-87.834529280663</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937514478363</lat>
+			            			<lon>-87.834421992302</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937538421069</lat>
+			            			<lon>-87.833424210548</lon>
+
+			                		<bs>
+			                			<id>9225</id>
+			                			<st><![CDATA[Belmont & Plainfield]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937594287348</lat>
+			            			<lon>-87.830961942673</lon>
+
+			                		<bs>
+			                			<id>9226</id>
+			                			<st><![CDATA[Belmont & Pioneer]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937622220469</lat>
+			            			<lon>-87.829969525337</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937630201358</lat>
+			            			<lon>-87.828515768051</lon>
+
+			                		<bs>
+			                			<id>9227</id>
+			                			<st><![CDATA[Belmont & Panama]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937646163135</lat>
+			            			<lon>-87.826412916183</lon>
+
+			                		<bs>
+			                			<id>9228</id>
+			                			<st><![CDATA[Belmont & Pacific (80th Avenue)]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937666115349</lat>
+			            			<lon>-87.823880910873</lon>
+
+			                		<bs>
+			                			<id>9229</id>
+			                			<st><![CDATA[Belmont & Orange (79th Avenue)]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937674096233</lat>
+			            			<lon>-87.822539806366</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937717991077</lat>
+			            			<lon>-87.821488380432</lon>
+
+			                		<bs>
+			                			<id>9230</id>
+			                			<st><![CDATA[Belmont & Ozanam (78th Avenue)]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937773857199</lat>
+			            			<lon>-87.819026112556</lon>
+
+			                		<bs>
+			                			<id>9231</id>
+			                			<st><![CDATA[Belmont & Overhill (77th Avenue)]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937813761542</lat>
+			            			<lon>-87.816558480263</lon>
+
+			                		<bs>
+			                			<id>9232</id>
+			                			<st><![CDATA[Belmont & Oriole]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93785366586</lat>
+			            			<lon>-87.814160585403</lon>
+
+			                		<bs>
+			                			<id>9233</id>
+			                			<st><![CDATA[Belmont & Olcott]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937849675429</lat>
+			            			<lon>-87.811725139618</lon>
+
+			                		<bs>
+			                			<id>9234</id>
+			                			<st><![CDATA[Belmont & Oketo]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93786563715</lat>
+			            			<lon>-87.809278964996</lon>
+
+			                		<bs>
+			                			<id>9235</id>
+			                			<st><![CDATA[Belmont & Octavia]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93786962758</lat>
+			            			<lon>-87.806950807571</lon>
+
+			                		<bs>
+			                			<id>9236</id>
+			                			<st><![CDATA[Belmont & Harlem]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937901551008</lat>
+			            			<lon>-87.804332971573</lon>
+
+			                		<bs>
+			                			<id>9237</id>
+			                			<st><![CDATA[Belmont & Nottingham]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937949436121</lat>
+			            			<lon>-87.801307439804</lon>
+
+			                		<bs>
+			                			<id>9238</id>
+			                			<st><![CDATA[Belmont & Sayre]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937997321197</lat>
+			            			<lon>-87.798271179199</lon>
+
+			                		<bs>
+			                			<id>9239</id>
+			                			<st><![CDATA[Belmont & New England]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938029244561</lat>
+			            			<lon>-87.795803546906</lon>
+
+			                		<bs>
+			                			<id>9240</id>
+			                			<st><![CDATA[Belmont & Oak Park]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938069148744</lat>
+			            			<lon>-87.793346643448</lon>
+
+			                		<bs>
+			                			<id>9241</id>
+			                			<st><![CDATA[Belmont & Normandy]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938105062488</lat>
+			            			<lon>-87.790825366974</lon>
+
+			                		<bs>
+			                			<id>9242</id>
+			                			<st><![CDATA[Belmont & Nashville]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938152947447</lat>
+			            			<lon>-87.788583040237</lon>
+
+			                		<bs>
+			                			<id>9243</id>
+			                			<st><![CDATA[Belmont & Natchez]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938200832371</lat>
+			            			<lon>-87.78623342514</lon>
+
+			                		<bs>
+			                			<id>9244</id>
+			                			<st><![CDATA[Belmont & Narragansett]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938228765226</lat>
+			            			<lon>-87.784618735313</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93823674604</lat>
+			            			<lon>-87.783540487289</lon>
+
+			                		<bs>
+			                			<id>9245</id>
+			                			<st><![CDATA[Belmont & Mobile]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938260688475</lat>
+			            			<lon>-87.781147956848</lon>
+
+			                		<bs>
+			                			<id>9246</id>
+			                			<st><![CDATA[Belmont & Melvina]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938292611707</lat>
+			            			<lon>-87.778723239899</lon>
+
+			                		<bs>
+			                			<id>9247</id>
+			                			<st><![CDATA[Belmont & Meade]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938320544523</lat>
+			            			<lon>-87.776287794113</lon>
+
+			                		<bs>
+			                			<id>9248</id>
+			                			<st><![CDATA[Belmont & Austin]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938340496526</lat>
+			            			<lon>-87.775053977966</lon>
+
+			                		<bs>
+			                			<id>9249</id>
+			                			<st><![CDATA[Belmont & Mason]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938396362103</lat>
+			            			<lon>-87.771127223969</lon>
+
+			                		<bs>
+			                			<id>15480</id>
+			                			<st><![CDATA[Belmont & Menard]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938412323687</lat>
+			            			<lon>-87.769024372101</lon>
+
+			                		<bs>
+			                			<id>9252</id>
+			                			<st><![CDATA[Belmont & Major]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938476169984</lat>
+			            			<lon>-87.766122221947</lon>
+
+			                		<bs>
+			                			<id>17017</id>
+			                			<st><![CDATA[Belmont & Central]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938484150767</lat>
+			            			<lon>-87.764083743095</lon>
+
+			                		<bs>
+			                			<id>9254</id>
+			                			<st><![CDATA[Belmont & Linder]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938504102719</lat>
+			            			<lon>-87.761734127998</lon>
+
+			                		<bs>
+			                			<id>9255</id>
+			                			<st><![CDATA[Belmont & Long]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938544006605</lat>
+			            			<lon>-87.759250402451</lon>
+
+			                		<bs>
+			                			<id>9256</id>
+			                			<st><![CDATA[Belmont & Lockwood]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938583910466</lat>
+			            			<lon>-87.756798863411</lon>
+
+			                		<bs>
+			                			<id>9257</id>
+			                			<st><![CDATA[Belmont & Laramie]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938611843154</lat>
+			            			<lon>-87.754325866699</lon>
+
+			                		<bs>
+			                			<id>9258</id>
+			                			<st><![CDATA[Belmont & Leclaire]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938635785448</lat>
+			            			<lon>-87.751525640488</lon>
+
+			                		<bs>
+			                			<id>15332</id>
+			                			<st><![CDATA[Belmont & Lavergne]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938667708492</lat>
+			            			<lon>-87.750243544579</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938671698872</lat>
+			            			<lon>-87.749385237694</lon>
+
+			                		<bs>
+			                			<id>9260</id>
+			                			<st><![CDATA[Belmont & Lamon]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938723573782</lat>
+			            			<lon>-87.747024893761</lon>
+
+			                		<bs>
+			                			<id>14634</id>
+			                			<st><![CDATA[Belmont & Cicero]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938759487157</lat>
+			            			<lon>-87.743178606033</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938783429396</lat>
+			            			<lon>-87.742985486984</lon>
+
+			                		<bs>
+			                			<id>9263</id>
+			                			<st><![CDATA[Belmont & Knox]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93886722716</lat>
+			            			<lon>-87.742143273354</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938891169358</lat>
+			            			<lon>-87.740963101387</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938807371625</lat>
+			            			<lon>-87.74071097374</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938815352366</lat>
+			            			<lon>-87.739638090134</lon>
+
+			                		<bs>
+			                			<id>9264</id>
+			                			<st><![CDATA[Belmont & Kilbourn]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938843284953</lat>
+			            			<lon>-87.737202644348</lon>
+
+			                		<bs>
+			                			<id>9265</id>
+			                			<st><![CDATA[Belmont & Kostner]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938883188626</lat>
+			            			<lon>-87.734568715096</lon>
+
+			                		<bs>
+			                			<id>9266</id>
+			                			<st><![CDATA[Belmont & Kildare]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938927082639</lat>
+			            			<lon>-87.731730937958</lon>
+
+			                		<bs>
+			                			<id>14635</id>
+			                			<st><![CDATA[Belmont & Keeler]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938955015176</lat>
+			            			<lon>-87.729697823524</lon>
+
+			                		<bs>
+			                			<id>9268</id>
+			                			<st><![CDATA[Belmont & Karlov]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938978957341</lat>
+			            			<lon>-87.727428674698</lon>
+
+			                		<bs>
+			                			<id>9269</id>
+			                			<st><![CDATA[Belmont & Pulaski]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939042803071</lat>
+			            			<lon>-87.723963260651</lon>
+
+			                		<bs>
+			                			<id>9270</id>
+			                			<st><![CDATA[Belmont & Milwaukee]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939042803071</lat>
+			            			<lon>-87.721597552299</lon>
+
+			                		<bs>
+			                			<id>17215</id>
+			                			<st><![CDATA[Belmont & Hamlin]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939062754849</lat>
+			            			<lon>-87.71982729435</lon>
+
+			                		<bs>
+			                			<id>9272</id>
+			                			<st><![CDATA[Belmont & Lawndale]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939090687327</lat>
+			            			<lon>-87.717461585999</lon>
+
+			                		<bs>
+			                			<id>9273</id>
+			                			<st><![CDATA[Belmont & Central Park]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939190446077</lat>
+			            			<lon>-87.715160250664</lon>
+
+			                		<bs>
+			                			<id>9274</id>
+			                			<st><![CDATA[Belmont & St. Louis]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939238330221</lat>
+			            			<lon>-87.713663578033</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93926227228</lat>
+			            			<lon>-87.712349295616</lon>
+
+			                		<bs>
+			                			<id>7858</id>
+			                			<st><![CDATA[Belmont & Kimball]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939214388154</lat>
+			            			<lon>-87.712225914001</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.939194436423</lat>
+			            			<lon>-87.711335420609</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.939222368844</lat>
+			            			<lon>-87.709994316101</lon>
+
+			                		<bs>
+			                			<id>7859</id>
+			                			<st><![CDATA[Belmont & Spaulding]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939266262622</lat>
+			            			<lon>-87.707794904709</lon>
+
+			                		<bs>
+			                			<id>7860</id>
+			                			<st><![CDATA[Belmont & Kedzie]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939266262622</lat>
+			            			<lon>-87.706437706947</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.939318137049</lat>
+			            			<lon>-87.706346511841</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93931414671</lat>
+			            			<lon>-87.704983949661</lon>
+
+			                		<bs>
+			                			<id>7861</id>
+			                			<st><![CDATA[Belmont & Albany ]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939322127388</lat>
+			            			<lon>-87.702843546867</lon>
+
+			                		<bs>
+			                			<id>7862</id>
+			                			<st><![CDATA[Belmont & Sacramento]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939346069415</lat>
+			            			<lon>-87.700445652008</lon>
+
+			                		<bs>
+			                			<id>7863</id>
+			                			<st><![CDATA[Belmont & Francisco]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939350059752</lat>
+			            			<lon>-87.698439359665</lon>
+
+			                		<bs>
+			                			<id>7864</id>
+			                			<st><![CDATA[Belmont & Elston]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939358040426</lat>
+			            			<lon>-87.697591781616</lon>
+
+			                		<bs>
+			                			<id>7865</id>
+			                			<st><![CDATA[Belmont & California]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939370011434</lat>
+			            			<lon>-87.695408463478</lon>
+
+			                		<bs>
+			                			<id>7866</id>
+			                			<st><![CDATA[Belmont & Washtenaw]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939377992104</lat>
+			            			<lon>-87.693160772324</lon>
+
+			                		<bs>
+			                			<id>7867</id>
+			                			<st><![CDATA[Belmont & Rockwell]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939409914778</lat>
+			            			<lon>-87.690698504448</lon>
+
+			                		<bs>
+			                			<id>7868</id>
+			                			<st><![CDATA[Belmont & Campbell ]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939445827766</lat>
+			            			<lon>-87.688246965408</lon>
+
+			                		<bs>
+			                			<id>7869</id>
+			                			<st><![CDATA[Belmont & Western/Clybourn]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939449818097</lat>
+			            			<lon>-87.685752511024</lon>
+
+			                		<bs>
+			                			<id>9275</id>
+			                			<st><![CDATA[Belmont & Oakley]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939473760076</lat>
+			            			<lon>-87.683290243149</lon>
+
+			                		<bs>
+			                			<id>9276</id>
+			                			<st><![CDATA[Belmont & Leavitt]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939505682701</lat>
+			            			<lon>-87.680903077126</lon>
+
+			                		<bs>
+			                			<id>9277</id>
+			                			<st><![CDATA[Belmont & Hoyne]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939537605311</lat>
+			            			<lon>-87.678505182266</lon>
+
+			                		<bs>
+			                			<id>9278</id>
+			                			<st><![CDATA[Belmont & Damen]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939557556933</lat>
+			            			<lon>-87.676048278809</lon>
+
+			                		<bs>
+			                			<id>9279</id>
+			                			<st><![CDATA[Belmont & Wolcott]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939581498872</lat>
+			            			<lon>-87.674283385277</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93957750855</lat>
+			            			<lon>-87.673881053925</lon>
+
+			                		<bs>
+			                			<id>9280</id>
+			                			<st><![CDATA[Belmont & Ravenswood]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939629382723</lat>
+			            			<lon>-87.670780420303</lon>
+
+			                		<bs>
+			                			<id>15994</id>
+			                			<st><![CDATA[Belmont & Paulina]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939665295588</lat>
+			            			<lon>-87.668259143829</lon>
+
+			                		<bs>
+			                			<id>14912</id>
+			                			<st><![CDATA[Belmont & Lincoln]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939697218117</lat>
+			            			<lon>-87.666376233101</lon>
+
+			                		<bs>
+			                			<id>9283</id>
+			                			<st><![CDATA[Belmont & Greenview]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939729140631</lat>
+			            			<lon>-87.663967609406</lon>
+
+			                		<bs>
+			                			<id>9284</id>
+			                			<st><![CDATA[Belmont & Southport]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93977303406</lat>
+			            			<lon>-87.66123175621</lon>
+
+			                		<bs>
+			                			<id>9285</id>
+			                			<st><![CDATA[Belmont & Lakewood]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939800966227</lat>
+			            			<lon>-87.659128904343</lon>
+
+			                		<bs>
+			                			<id>9286</id>
+			                			<st><![CDATA[Belmont & Racine]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939844859608</lat>
+			            			<lon>-87.656650543213</lon>
+
+			                		<bs>
+			                			<id>9287</id>
+			                			<st><![CDATA[Belmont & Seminary]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939884762655</lat>
+			            			<lon>-87.65388250351</lon>
+
+			                		<bs>
+			                			<id>9288</id>
+			                			<st><![CDATA[Belmont & Sheffield]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939932646278</lat>
+			            			<lon>-87.65028834343</lon>
+
+			                		<bs>
+			                			<id>14913</id>
+			                			<st><![CDATA[Belmont & Clark]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939984520162</lat>
+			            			<lon>-87.646930217743</lon>
+
+			                		<bs>
+			                			<id>4987</id>
+			                			<st><![CDATA[Belmont & Orchard]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940020432827</lat>
+			            			<lon>-87.644065618515</lon>
+
+			                		<bs>
+			                			<id>14914</id>
+			                			<st><![CDATA[Belmont & Broadway]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940044374592</lat>
+			            			<lon>-87.642059326172</lon>
+
+			                		<bs>
+			                			<id>4990</id>
+			                			<st><![CDATA[Belmont & Pine Grove]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940088267805</lat>
+			            			<lon>-87.639774084091</lon>
+
+			                		<bs>
+			                			<id>9291</id>
+			                			<st><![CDATA[Belmont & Sheridan]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940136151276</lat>
+			            			<lon>-87.639173269272</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.940243888953</lat>
+			            			<lon>-87.638846039772</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938875207894</lat>
+			            			<lon>-87.637993097305</lon>
+
+			                		<bs>
+			                			<id>9293</id>
+			                			<st><![CDATA[Lake Shore Drive & Briar]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93789756058</lat>
+			            			<lon>-87.637403011322</lon>
+
+			                		<bs>
+			                			<id>14971</id>
+			                			<st><![CDATA[Lake Shore Drive & Barry]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937470583378</lat>
+			            			<lon>-87.637177705765</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937019660425</lat>
+			            			<lon>-87.636995315552</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.936700421009</lat>
+			            			<lon>-87.636888027191</lon>
+
+			                		<bs>
+			                			<id>9294</id>
+			                			<st><![CDATA[Lake Shore Drive & Wellington]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.936584696326</lat>
+			            			<lon>-87.636871933937</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.935782598785</lat>
+			            			<lon>-87.636780738831</lon>
+
+			                		<bs>
+			                			<id>9295</id>
+			                			<st><![CDATA[Lake Shore Drive & Oakdale]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.934960538102</lat>
+			            			<lon>-87.636770009995</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93454551315</lat>
+			            			<lon>-87.636721730232</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93428213053</lat>
+			            			<lon>-87.636641263962</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.934002784137</lat>
+			            			<lon>-87.636501789093</lon>
+
+			                		<bs>
+			                			<id>9296</id>
+			                			<st><![CDATA[St. Joseph Hospital ]]></st>
+			                		</bs>
+
+								</pt>
+
+						</pa>
+
+						<pa>
+							<id>3982</id>
+							<l>57689.0</l>
+							<d>West Bound</d>
+
+								<pt>
+									<lat>41.934002784137</lat>
+			            			<lon>-87.636501789093</lon>
+
+			                		<bs>
+			                			<id>9296</id>
+			                			<st><![CDATA[St. Joseph Hospital ]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.933416152732</lat>
+			            			<lon>-87.636212110519</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.933168728344</lat>
+			            			<lon>-87.636120915413</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.932885386334</lat>
+			            			<lon>-87.636217474937</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.932949238165</lat>
+			            			<lon>-87.637934088707</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.932925293736</lat>
+			            			<lon>-87.639323472977</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93300111773</lat>
+			            			<lon>-87.639323472977</lon>
+
+			                		<bs>
+			                			<id>1148</id>
+			                			<st><![CDATA[Sheridan & Diversey]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.9344896442</lat>
+			            			<lon>-87.639280557632</lon>
+
+			                		<bs>
+			                			<id>1149</id>
+			                			<st><![CDATA[Sheridan & Surf]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.935798561024</lat>
+			            			<lon>-87.639334201813</lon>
+
+			                		<bs>
+			                			<id>1150</id>
+			                			<st><![CDATA[Sheridan & Oakdale]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.936744316523</lat>
+			            			<lon>-87.639355659485</lon>
+
+			                		<bs>
+			                			<id>1151</id>
+			                			<st><![CDATA[Sheridan & Wellington]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937901551008</lat>
+			            			<lon>-87.639403939247</lon>
+
+			                		<bs>
+			                			<id>1152</id>
+			                			<st><![CDATA[Sheridan & Barry]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938723573782</lat>
+			            			<lon>-87.639462947845</lon>
+
+			                		<bs>
+			                			<id>1153</id>
+			                			<st><![CDATA[Sheridan & Briar]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940172063855</lat>
+			            			<lon>-87.6394790411</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.940148122138</lat>
+			            			<lon>-87.639908194542</lon>
+
+			                		<bs>
+			                			<id>4993</id>
+			                			<st><![CDATA[Belmont & Sheridan]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940120190123</lat>
+			            			<lon>-87.640911340714</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.940108219256</lat>
+			            			<lon>-87.641957402229</lon>
+
+			                		<bs>
+			                			<id>4994</id>
+			                			<st><![CDATA[Belmont & Pine Grove]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940084277514</lat>
+			            			<lon>-87.644307017326</lon>
+
+			                		<bs>
+			                			<id>4996</id>
+			                			<st><![CDATA[Belmont & Broadway]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940052355179</lat>
+			            			<lon>-87.6468282938</lon>
+
+			                		<bs>
+			                			<id>4997</id>
+			                			<st><![CDATA[Belmont & Orchard]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940028413416</lat>
+			            			<lon>-87.648775577545</lon>
+
+			                		<bs>
+			                			<id>4998</id>
+			                			<st><![CDATA[Belmont & Halsted]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93998851046</lat>
+			            			<lon>-87.651093006134</lon>
+
+			                		<bs>
+			                			<id>14915</id>
+			                			<st><![CDATA[Belmont & Clark]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939952597777</lat>
+			            			<lon>-87.653952240944</lon>
+
+			                		<bs>
+			                			<id>9299</id>
+			                			<st><![CDATA[Belmont & Sheffield]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939912694772</lat>
+			            			<lon>-87.656382322311</lon>
+
+			                		<bs>
+			                			<id>9300</id>
+			                			<st><![CDATA[Belmont & Seminary]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939864811134</lat>
+			            			<lon>-87.659268379211</lon>
+
+			                		<bs>
+			                			<id>14916</id>
+			                			<st><![CDATA[Belmont & Racine]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939836878995</lat>
+			            			<lon>-87.661263942719</lon>
+
+			                		<bs>
+			                			<id>9302</id>
+			                			<st><![CDATA[Belmont & Lakewood]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939792985609</lat>
+			            			<lon>-87.664080262184</lon>
+
+			                		<bs>
+			                			<id>14917</id>
+			                			<st><![CDATA[Belmont & Southport]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93977303406</lat>
+			            			<lon>-87.666027545929</lon>
+
+			                		<bs>
+			                			<id>9304</id>
+			                			<st><![CDATA[Belmont & Greenview]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93971716969</lat>
+			            			<lon>-87.668548822403</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93971716969</lat>
+			            			<lon>-87.669138908386</lon>
+
+			                		<bs>
+			                			<id>14918</id>
+			                			<st><![CDATA[Belmont & Ashland]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939689237486</lat>
+			            			<lon>-87.671467065811</lon>
+
+			                		<bs>
+			                			<id>15995</id>
+			                			<st><![CDATA[Belmont & Paulina]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939657314953</lat>
+			            			<lon>-87.673290967941</lon>
+
+			                		<bs>
+			                			<id>9307</id>
+			                			<st><![CDATA[Belmont & Ravenswood]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939629382723</lat>
+			            			<lon>-87.675817608833</lon>
+
+			                		<bs>
+			                			<id>9308</id>
+			                			<st><![CDATA[Belmont & Wolcott]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939605440802</lat>
+			            			<lon>-87.678226232529</lon>
+
+			                		<bs>
+			                			<id>9309</id>
+			                			<st><![CDATA[Belmont & Damen]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93957750855</lat>
+			            			<lon>-87.680661678314</lon>
+
+			                		<bs>
+			                			<id>9310</id>
+			                			<st><![CDATA[Belmont & Hoyne]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939553566609</lat>
+			            			<lon>-87.683016657829</lon>
+
+			                		<bs>
+			                			<id>9311</id>
+			                			<st><![CDATA[Belmont & Leavitt]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939521644008</lat>
+			            			<lon>-87.685500383377</lon>
+
+			                		<bs>
+			                			<id>9312</id>
+			                			<st><![CDATA[Belmont & Oakley]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939517653682</lat>
+			            			<lon>-87.688493728638</lon>
+
+			                		<bs>
+			                			<id>7937</id>
+			                			<st><![CDATA[Belmont & Western/Clybourn]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939485731062</lat>
+			            			<lon>-87.689588069916</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.939481740734</lat>
+			            			<lon>-87.690441012383</lon>
+
+			                		<bs>
+			                			<id>7938</id>
+			                			<st><![CDATA[Belmont & Campbell ]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939445827766</lat>
+			            			<lon>-87.693058848381</lon>
+
+			                		<bs>
+			                			<id>7939</id>
+			                			<st><![CDATA[Belmont & Rockwell]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939437847104</lat>
+			            			<lon>-87.695059776306</lon>
+
+			                		<bs>
+			                			<id>7940</id>
+			                			<st><![CDATA[Belmont & Washtenaw]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939425876108</lat>
+			            			<lon>-87.697640061378</lon>
+
+			                		<bs>
+			                			<id>7941</id>
+			                			<st><![CDATA[Belmont & California]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939421885776</lat>
+			            			<lon>-87.700091600418</lon>
+
+			                		<bs>
+			                			<id>7942</id>
+			                			<st><![CDATA[Belmont & Francisco]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939389963109</lat>
+			            			<lon>-87.702623605728</lon>
+
+			                		<bs>
+			                			<id>7943</id>
+			                			<st><![CDATA[Belmont & Sacramento]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939381982439</lat>
+			            			<lon>-87.705059051514</lon>
+
+			                		<bs>
+			                			<id>7944</id>
+			                			<st><![CDATA[Belmont & Albany ]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939374001769</lat>
+			            			<lon>-87.706357240677</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.939417895443</lat>
+			            			<lon>-87.706453800201</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.939405924444</lat>
+			            			<lon>-87.707762718201</lon>
+
+			                		<bs>
+			                			<id>7945</id>
+			                			<st><![CDATA[Belmont & Kedzie]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939374001769</lat>
+			            			<lon>-87.709929943085</lon>
+
+			                		<bs>
+			                			<id>7946</id>
+			                			<st><![CDATA[Belmont & Spaulding]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939350059752</lat>
+			            			<lon>-87.712199091911</lon>
+
+			                		<bs>
+			                			<id>7947</id>
+			                			<st><![CDATA[Belmont & Kimball Terminal]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939326117726</lat>
+			            			<lon>-87.712317109108</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93931414671</lat>
+			            			<lon>-87.713706493378</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.939270252964</lat>
+			            			<lon>-87.714865207672</lon>
+
+			                		<bs>
+			                			<id>9313</id>
+			                			<st><![CDATA[Belmont & St. Louis]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939162513642</lat>
+			            			<lon>-87.717338204384</lon>
+
+			                		<bs>
+			                			<id>9314</id>
+			                			<st><![CDATA[Belmont & Central Park]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939122610144</lat>
+			            			<lon>-87.719618082047</lon>
+
+			                		<bs>
+			                			<id>9315</id>
+			                			<st><![CDATA[Belmont & Lawndale]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939110639089</lat>
+			            			<lon>-87.722235918045</lon>
+
+			                		<bs>
+			                			<id>9316</id>
+			                			<st><![CDATA[Belmont & Hamlin]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939106648737</lat>
+			            			<lon>-87.724016904831</lon>
+
+			                		<bs>
+			                			<id>9317</id>
+			                			<st><![CDATA[Belmont & Milwaukee]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939046793427</lat>
+			            			<lon>-87.727385759354</lon>
+
+			                		<bs>
+			                			<id>14637</id>
+			                			<st><![CDATA[Belmont & Pulaski]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939026841645</lat>
+			            			<lon>-87.729386687279</lon>
+
+			                		<bs>
+			                			<id>9319</id>
+			                			<st><![CDATA[Belmont & Karlov]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938978957341</lat>
+			            			<lon>-87.732278108597</lon>
+
+			                		<bs>
+			                			<id>14638</id>
+			                			<st><![CDATA[Belmont & Keeler]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938955015176</lat>
+			            			<lon>-87.73436486721</lon>
+
+			                		<bs>
+			                			<id>9321</id>
+			                			<st><![CDATA[Belmont & Kildare]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938915111547</lat>
+			            			<lon>-87.736993432045</lon>
+
+			                		<bs>
+			                			<id>9322</id>
+			                			<st><![CDATA[Belmont & Kostner]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938887178992</lat>
+			            			<lon>-87.739289402962</lon>
+
+			                		<bs>
+			                			<id>9323</id>
+			                			<st><![CDATA[Belmont & Kilbourn]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93886722716</lat>
+			            			<lon>-87.740678787231</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938959005537</lat>
+			            			<lon>-87.740936279297</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93894304409</lat>
+			            			<lon>-87.742132544518</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938827323476</lat>
+			            			<lon>-87.743141055107</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938827323476</lat>
+			            			<lon>-87.743720412254</lon>
+
+			                		<bs>
+			                			<id>9324</id>
+			                			<st><![CDATA[Belmont & Kilpatrick]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938799390883</lat>
+			            			<lon>-87.745571136475</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938799390883</lat>
+			            			<lon>-87.746660113335</lon>
+
+			                		<bs>
+			                			<id>14639</id>
+			                			<st><![CDATA[Belmont & Cicero]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938739535285</lat>
+			            			<lon>-87.749176025391</lon>
+
+			                		<bs>
+			                			<id>9326</id>
+			                			<st><![CDATA[Belmont & Lamon]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938703621899</lat>
+			            			<lon>-87.751622200012</lon>
+
+			                		<bs>
+			                			<id>9327</id>
+			                			<st><![CDATA[Belmont & Lavergne]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938683670009</lat>
+			            			<lon>-87.754116654396</lon>
+
+			                		<bs>
+			                			<id>9328</id>
+			                			<st><![CDATA[Belmont & Leclaire]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938655737353</lat>
+			            			<lon>-87.756536006927</lon>
+
+			                		<bs>
+			                			<id>9329</id>
+			                			<st><![CDATA[Belmont & Laramie]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938615833537</lat>
+			            			<lon>-87.758960723877</lon>
+
+			                		<bs>
+			                			<id>9330</id>
+			                			<st><![CDATA[Belmont & Lockwood]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938579920081</lat>
+			            			<lon>-87.761428356171</lon>
+
+			                		<bs>
+			                			<id>9331</id>
+			                			<st><![CDATA[Belmont & Long]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938544006605</lat>
+			            			<lon>-87.763874530792</lon>
+
+			                		<bs>
+			                			<id>9332</id>
+			                			<st><![CDATA[Belmont & Linder]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938528045054</lat>
+			            			<lon>-87.766320705414</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.938520064277</lat>
+			            			<lon>-87.766926884651</lon>
+
+			                		<bs>
+			                			<id>17019</id>
+			                			<st><![CDATA[Belmont & Central]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938476169984</lat>
+			            			<lon>-87.76894390583</lon>
+
+			                		<bs>
+			                			<id>9334</id>
+			                			<st><![CDATA[Belmont & Major]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938456218023</lat>
+			            			<lon>-87.771148681641</lon>
+
+			                		<bs>
+			                			<id>9335</id>
+			                			<st><![CDATA[Belmont & Menard]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938416314083</lat>
+			            			<lon>-87.775075435638</lon>
+
+			                		<bs>
+			                			<id>9337</id>
+			                			<st><![CDATA[Belmont & Mason]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938392371706</lat>
+			            			<lon>-87.776223421097</lon>
+
+			                		<bs>
+			                			<id>9338</id>
+			                			<st><![CDATA[Belmont & Austin]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938356458125</lat>
+			            			<lon>-87.778465747833</lon>
+
+			                		<bs>
+			                			<id>9339</id>
+			                			<st><![CDATA[Belmont & Meade]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938336506126</lat>
+			            			<lon>-87.780890464783</lon>
+
+			                		<bs>
+			                			<id>9340</id>
+			                			<st><![CDATA[Belmont & Melvina]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938308573318</lat>
+			            			<lon>-87.78332054615</lon>
+
+			                		<bs>
+			                			<id>9341</id>
+			                			<st><![CDATA[Belmont & Mobile]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938272659689</lat>
+			            			<lon>-87.785847187042</lon>
+
+			                		<bs>
+			                			<id>9342</id>
+			                			<st><![CDATA[Belmont & Narragansett]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938224774819</lat>
+			            			<lon>-87.788320183754</lon>
+
+			                		<bs>
+			                			<id>9343</id>
+			                			<st><![CDATA[Belmont & Natchez]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938176889914</lat>
+			            			<lon>-87.790728807449</lon>
+
+			                		<bs>
+			                			<id>9344</id>
+			                			<st><![CDATA[Belmont & Nashville]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938140976211</lat>
+			            			<lon>-87.793239355087</lon>
+
+			                		<bs>
+			                			<id>9345</id>
+			                			<st><![CDATA[Belmont & Normandy]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938097081658</lat>
+			            			<lon>-87.795680165291</lon>
+
+			                		<bs>
+			                			<id>9346</id>
+			                			<st><![CDATA[Belmont & Oak Park]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938077129578</lat>
+			            			<lon>-87.797938585281</lon>
+
+			                		<bs>
+			                			<id>9347</id>
+			                			<st><![CDATA[Belmont & New England]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938025254142</lat>
+			            			<lon>-87.801012396812</lon>
+
+			                		<bs>
+			                			<id>9348</id>
+			                			<st><![CDATA[Belmont & Sayre]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93796938824</lat>
+			            			<lon>-87.804064750671</lon>
+
+			                		<bs>
+			                			<id>9349</id>
+			                			<st><![CDATA[Belmont & Nottingham]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937945445696</lat>
+			            			<lon>-87.806521654129</lon>
+
+			                		<bs>
+			                			<id>9350</id>
+			                			<st><![CDATA[Belmont & Harlem]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937925493569</lat>
+			            			<lon>-87.807857394218</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937941455271</lat>
+			            			<lon>-87.809010744095</lon>
+
+			                		<bs>
+			                			<id>9351</id>
+			                			<st><![CDATA[Belmont & Octavia]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937921503143</lat>
+			            			<lon>-87.811135053635</lon>
+
+			                		<bs>
+			                			<id>9352</id>
+			                			<st><![CDATA[Belmont & Oketo]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93791352229</lat>
+			            			<lon>-87.812760472298</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93791352229</lat>
+			            			<lon>-87.813876271248</lon>
+
+			                		<bs>
+			                			<id>9353</id>
+			                			<st><![CDATA[Belmont & Olcott]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937885589296</lat>
+			            			<lon>-87.816333174706</lon>
+
+			                		<bs>
+			                			<id>9354</id>
+			                			<st><![CDATA[Belmont & Oriole]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937845684998</lat>
+			            			<lon>-87.818763256073</lon>
+
+			                		<bs>
+			                			<id>9355</id>
+			                			<st><![CDATA[Belmont & Overhill (77th Avenue)]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937793809374</lat>
+			            			<lon>-87.821209430695</lon>
+
+			                		<bs>
+			                			<id>9356</id>
+			                			<st><![CDATA[Belmont & Ozanam (78th Avenue)]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937745924144</lat>
+			            			<lon>-87.822588086128</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937725971955</lat>
+			            			<lon>-87.823650240898</lon>
+
+			                		<bs>
+			                			<id>9357</id>
+			                			<st><![CDATA[Belmont & Orange (79th Avenue)]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937710010199</lat>
+			            			<lon>-87.82617688179</lon>
+
+			                		<bs>
+			                			<id>9358</id>
+			                			<st><![CDATA[Belmont & Pacific (80th Avenue)]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937702029319</lat>
+			            			<lon>-87.82862842083</lon>
+
+			                		<bs>
+			                			<id>9359</id>
+			                			<st><![CDATA[Belmont & Panama]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937694048439</lat>
+			            			<lon>-87.829974889755</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937662124907</lat>
+			            			<lon>-87.831117510796</lon>
+
+			                		<bs>
+			                			<id>9360</id>
+			                			<st><![CDATA[Belmont & Pioneer]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937602268241</lat>
+			            			<lon>-87.833515405655</lon>
+
+			                		<bs>
+			                			<id>9361</id>
+			                			<st><![CDATA[Belmont & Plainfield]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937582316006</lat>
+			            			<lon>-87.834421992302</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937630201358</lat>
+			            			<lon>-87.834518551826</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937630201358</lat>
+			            			<lon>-87.834776043892</lon>
+
+			                		<bs>
+			                			<id>9362</id>
+			                			<st><![CDATA[Belmont & Pontiac]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937618230024</lat>
+			            			<lon>-87.835693359375</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937287022207</lat>
+			            			<lon>-87.835682630539</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.937275050808</lat>
+			            			<lon>-87.835532426834</lon>
+
+			                		<bs>
+			                			<id>9224</id>
+			                			<st><![CDATA[Belmont & Cumberland Terminal]]></st>
+			                		</bs>
+
+								</pt>
+
+						</pa>
+
+						<pa>
+							<id>1553</id>
+							<l>23690.0</l>
+							<d>West Bound</d>
+
+								<pt>
+									<lat>41.934002784137</lat>
+			            			<lon>-87.636501789093</lon>
+
+			                		<bs>
+			                			<id>9296</id>
+			                			<st><![CDATA[St. Joseph Hospital ]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.933416152732</lat>
+			            			<lon>-87.636212110519</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.933168728344</lat>
+			            			<lon>-87.636120915413</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.932885386334</lat>
+			            			<lon>-87.636217474937</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.932949238165</lat>
+			            			<lon>-87.637934088707</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.932925293736</lat>
+			            			<lon>-87.639323472977</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93300111773</lat>
+			            			<lon>-87.639323472977</lon>
+
+			                		<bs>
+			                			<id>1148</id>
+			                			<st><![CDATA[Sheridan & Diversey]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.9344896442</lat>
+			            			<lon>-87.639280557632</lon>
+
+			                		<bs>
+			                			<id>1149</id>
+			                			<st><![CDATA[Sheridan & Surf]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.935798561024</lat>
+			            			<lon>-87.639334201813</lon>
+
+			                		<bs>
+			                			<id>1150</id>
+			                			<st><![CDATA[Sheridan & Oakdale]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.936744316523</lat>
+			            			<lon>-87.639355659485</lon>
+
+			                		<bs>
+			                			<id>1151</id>
+			                			<st><![CDATA[Sheridan & Wellington]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.937901551008</lat>
+			            			<lon>-87.639403939247</lon>
+
+			                		<bs>
+			                			<id>1152</id>
+			                			<st><![CDATA[Sheridan & Barry]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.938723573782</lat>
+			            			<lon>-87.639462947845</lon>
+
+			                		<bs>
+			                			<id>1153</id>
+			                			<st><![CDATA[Sheridan & Briar]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940172063855</lat>
+			            			<lon>-87.6394790411</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.940148122138</lat>
+			            			<lon>-87.639908194542</lon>
+
+			                		<bs>
+			                			<id>4993</id>
+			                			<st><![CDATA[Belmont & Sheridan]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940120190123</lat>
+			            			<lon>-87.640911340714</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.940108219256</lat>
+			            			<lon>-87.641957402229</lon>
+
+			                		<bs>
+			                			<id>4994</id>
+			                			<st><![CDATA[Belmont & Pine Grove]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940084277514</lat>
+			            			<lon>-87.644307017326</lon>
+
+			                		<bs>
+			                			<id>4996</id>
+			                			<st><![CDATA[Belmont & Broadway]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940052355179</lat>
+			            			<lon>-87.6468282938</lon>
+
+			                		<bs>
+			                			<id>4997</id>
+			                			<st><![CDATA[Belmont & Orchard]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.940028413416</lat>
+			            			<lon>-87.648775577545</lon>
+
+			                		<bs>
+			                			<id>4998</id>
+			                			<st><![CDATA[Belmont & Halsted]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93998851046</lat>
+			            			<lon>-87.651093006134</lon>
+
+			                		<bs>
+			                			<id>14915</id>
+			                			<st><![CDATA[Belmont & Clark]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939952597777</lat>
+			            			<lon>-87.653952240944</lon>
+
+			                		<bs>
+			                			<id>9299</id>
+			                			<st><![CDATA[Belmont & Sheffield]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939912694772</lat>
+			            			<lon>-87.656382322311</lon>
+
+			                		<bs>
+			                			<id>9300</id>
+			                			<st><![CDATA[Belmont & Seminary]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939864811134</lat>
+			            			<lon>-87.659268379211</lon>
+
+			                		<bs>
+			                			<id>14916</id>
+			                			<st><![CDATA[Belmont & Racine]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939836878995</lat>
+			            			<lon>-87.661263942719</lon>
+
+			                		<bs>
+			                			<id>9302</id>
+			                			<st><![CDATA[Belmont & Lakewood]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939792985609</lat>
+			            			<lon>-87.664080262184</lon>
+
+			                		<bs>
+			                			<id>14917</id>
+			                			<st><![CDATA[Belmont & Southport]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93977303406</lat>
+			            			<lon>-87.666027545929</lon>
+
+			                		<bs>
+			                			<id>9304</id>
+			                			<st><![CDATA[Belmont & Greenview]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93971716969</lat>
+			            			<lon>-87.668548822403</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.93971716969</lat>
+			            			<lon>-87.669138908386</lon>
+
+			                		<bs>
+			                			<id>14918</id>
+			                			<st><![CDATA[Belmont & Ashland]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939689237486</lat>
+			            			<lon>-87.671467065811</lon>
+
+			                		<bs>
+			                			<id>15995</id>
+			                			<st><![CDATA[Belmont & Paulina]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939657314953</lat>
+			            			<lon>-87.673290967941</lon>
+
+			                		<bs>
+			                			<id>9307</id>
+			                			<st><![CDATA[Belmont & Ravenswood]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939629382723</lat>
+			            			<lon>-87.675817608833</lon>
+
+			                		<bs>
+			                			<id>9308</id>
+			                			<st><![CDATA[Belmont & Wolcott]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939605440802</lat>
+			            			<lon>-87.678226232529</lon>
+
+			                		<bs>
+			                			<id>9309</id>
+			                			<st><![CDATA[Belmont & Damen]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.93957750855</lat>
+			            			<lon>-87.680661678314</lon>
+
+			                		<bs>
+			                			<id>9310</id>
+			                			<st><![CDATA[Belmont & Hoyne]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939553566609</lat>
+			            			<lon>-87.683016657829</lon>
+
+			                		<bs>
+			                			<id>9311</id>
+			                			<st><![CDATA[Belmont & Leavitt]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939521644008</lat>
+			            			<lon>-87.685500383377</lon>
+
+			                		<bs>
+			                			<id>9312</id>
+			                			<st><![CDATA[Belmont & Oakley]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939517653682</lat>
+			            			<lon>-87.688493728638</lon>
+
+			                		<bs>
+			                			<id>7937</id>
+			                			<st><![CDATA[Belmont & Western/Clybourn]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939485731062</lat>
+			            			<lon>-87.689588069916</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.939481740734</lat>
+			            			<lon>-87.690441012383</lon>
+
+			                		<bs>
+			                			<id>7938</id>
+			                			<st><![CDATA[Belmont & Campbell ]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939445827766</lat>
+			            			<lon>-87.693058848381</lon>
+
+			                		<bs>
+			                			<id>7939</id>
+			                			<st><![CDATA[Belmont & Rockwell]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939437847104</lat>
+			            			<lon>-87.695059776306</lon>
+
+			                		<bs>
+			                			<id>7940</id>
+			                			<st><![CDATA[Belmont & Washtenaw]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939425876108</lat>
+			            			<lon>-87.697640061378</lon>
+
+			                		<bs>
+			                			<id>7941</id>
+			                			<st><![CDATA[Belmont & California]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939421885776</lat>
+			            			<lon>-87.700091600418</lon>
+
+			                		<bs>
+			                			<id>7942</id>
+			                			<st><![CDATA[Belmont & Francisco]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939389963109</lat>
+			            			<lon>-87.702623605728</lon>
+
+			                		<bs>
+			                			<id>7943</id>
+			                			<st><![CDATA[Belmont & Sacramento]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939381982439</lat>
+			            			<lon>-87.705059051514</lon>
+
+			                		<bs>
+			                			<id>7944</id>
+			                			<st><![CDATA[Belmont & Albany ]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939374001769</lat>
+			            			<lon>-87.706357240677</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.939417895443</lat>
+			            			<lon>-87.706453800201</lon>
+
+								</pt>
+
+								<pt>
+									<lat>41.939405924444</lat>
+			            			<lon>-87.707762718201</lon>
+
+			                		<bs>
+			                			<id>7945</id>
+			                			<st><![CDATA[Belmont & Kedzie]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939374001769</lat>
+			            			<lon>-87.709929943085</lon>
+
+			                		<bs>
+			                			<id>7946</id>
+			                			<st><![CDATA[Belmont & Spaulding]]></st>
+			                		</bs>
+
+								</pt>
+
+								<pt>
+									<lat>41.939350059752</lat>
+			            			<lon>-87.712199091911</lon>
+
+			                		<bs>
+			                			<id>7947</id>
+			                			<st><![CDATA[Belmont & Kimball Terminal]]></st>
+			                		</bs>
+
+								</pt>
+
+						</pa>
+
+			</pas>
+		</route>
