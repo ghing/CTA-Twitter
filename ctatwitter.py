@@ -123,7 +123,6 @@ class BusTrackerMessageParser(object):
             if msg_tokens[2] == 'stops' or msg_tokens[2] == 's':
                 # List stops
 
-                #response = "Stop listing is not yet implemented. Check http://tinyurl.com/ctatwit for updates."
                 response = "Stops (ID:Name): "
                 if direction == "n":
                    direction_arg = "North Bound"
