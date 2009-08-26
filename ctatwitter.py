@@ -33,7 +33,7 @@ class CommandNotUnderstoodException(BusTrackerMessageParserException):
 # Example: "2 n 10487" gets the next northbound busses for stop with stop ID 10487
 # Example: "2 n Stony Island" gets the next northbound busses for all stops with Stony Island in the name
 class BusTrackerMessageParser(object):
-    """Class to encapsulate parsing messages and returning a response."""
+    """Class to encapsulate parsing messages and returning "a response."""
 
     # Insert this into the response to force the message to be broken at that
     # point by ShortMessage.split().  The default is to split messages at
@@ -41,8 +41,7 @@ class BusTrackerMessageParser(object):
     # a split elsewhere (for example, keeping stop names and IDs together)
     MESSAGE_TOKEN_SEP = "-;;-" 
 
-    def __init__(self, logger):
-        self._logger = logger
+    def __init__(self):
         self._name_history = []
 
     def shorten_name(self, name):
@@ -95,6 +94,8 @@ class BusTrackerMessageParser(object):
         self._name_history = []
 
     def get_response(self, msg):
+        logger = logging.getLogger()
+
         # Split the message into tokens
         msg_tokens = msg.split()
 
@@ -139,17 +140,16 @@ class BusTrackerMessageParser(object):
                     for stop in stops:
                         response += "%s:%s;" % (stop.id, stop.name) + self.MESSAGE_TOKEN_SEP
                 except BustrackerApiConnectionError, e:
-                    self._logger.error("Couldn't connect to the API: %s" % e)
+                    logger.error("Couldn't connect to the API: %s" % e)
                     response = "I'm having trouble getting bus information from the CTA's system.  Please try again later."
                 except BustrackerApiXmlError, e:
-                    self._logger.error("%s", % e)
+                    logger.error("%s", % e)
                     response = "Oops.  That didn't go as planned.  I'm looking into it."
                     
                 # TODO: Add support for showing only stops matching string
             elif len(msg_tokens) == 3 and msg_tokens[2].isdigit():
                 # Entered the id of a stop, try to get next busses.
 
-                # TODO: Search for the upcoming busses
                 try:
                     bt = transitapi.Bustracker()
                     predicted_busses = bt.getStopPredictions(stop_id, route, direction)
@@ -164,10 +164,10 @@ class BusTrackerMessageParser(object):
                           if i != len(predicted_busses) - 1:
                               response += ", "
                 except BustrackerApiConnectionError, e:
-                    self._logger.error("Couldn't connect to the API: %s" % e)
+                    logger.error("Couldn't connect to the API: %s" % e)
                     response = "I'm having trouble getting bus information from the CTA's system.  Please try again later."
                 except BustrackerApiXmlError, e:
-                    self._logger.error("%s", % e)
+                    logger.error("%s", % e)
                     response = "Oops.  That didn't go as planned.  I'm looking into it."
             else:
                 # General fail
@@ -181,10 +181,9 @@ class BusTrackerMessageParser(object):
 class TwitterBot(object):
     '''A class for a bot processs that will poll a POP server for Twitter e-mails and respond to them''' 
 
-    def __init__(self, config, logger):
+    def __init__(self, config):
         self._config = config
         self._messages = []
-        self._logger = logger
         self._twitter_username = config.get('twitter', 'username')
         self._api = twitter.Api(username=self._twitter_username, \
                                 password=config.get('twitter', 'password'))
@@ -223,7 +222,6 @@ class TwitterBot(object):
             type, data = server.search(None, 'NOT', 'DELETED')
             for num in data[0].split():
               typ, data = server.fetch(num, '(RFC822)')
-              #self._logger.debug('Message %s\n%s\n' % (num, data[0][1]))
               self._messages.append(data[0][1])
               server.copy(num, self._config.get('imap', 'backup_mailbox'))
               server.store(num, 'FLAGS', '(\Deleted)')
@@ -246,9 +244,8 @@ class TwitterBot(object):
         pass
 
 class CtaTwitterBot(TwitterBot):
-
-    def __init__(self, config, logger):
-        TwitterBot.__init__(self, config, logger)
+    def __init__(self, config):
+        TwitterBot.__init__(self, config)
         if config.get('database', 'engine') == 'sqlite':
 	    self._conn = sqlite3.connect(config.get('database', 'file'))
 
@@ -297,7 +294,8 @@ class CtaTwitterBot(TwitterBot):
         cursor.close()
 
     def parse_message(self, message):
-        self._logger.debug("Begin parsing message with id %s" % (message['Message-ID']))
+        logger = logging.getLogger()  
+        logger.debug("Begin parsing message with id %s" % (message['Message-ID']))
 
         if message['X-Twittercreatedat']:
             email_type = message['X-Twitteremailtype']
@@ -315,7 +313,7 @@ class CtaTwitterBot(TwitterBot):
             if (recipient_screen_name == self._twitter_username and \
                 not self._seen_message(message)):
                 # This is a new twitter message to us
-                self._logger.debug("Message is a %s message from %s" % \
+                logger.debug("Message is a %s message from %s" % \
                                    (email_type, \
                                     sender_screen_name))
 
@@ -370,7 +368,7 @@ class CtaTwitterBot(TwitterBot):
                     direct_message = message_body.splitlines()[0]
                     # logger.debug(direct_message)
 
-                    message_parser = BusTrackerMessageParser(self._logger) 
+                    message_parser = BusTrackerMessageParser() 
                     try:
                         response  = message_parser.get_response(direct_message)
                     except CommandNotUnderstoodException, err: 
@@ -391,24 +389,25 @@ class CtaTwitterBot(TwitterBot):
                 self._db_log_message(message, direct_message) # log it in the database
 
             else: 
-                self._logger.debug("Message has been seen before or isn't to us.")
+                logger.debug("Message has been seen before or isn't to us.")
         
         else:
-            self._logger.debug("Message is not from Twitter") 
+            logger.debug("Message is not from Twitter") 
         
-        self._logger.debug("End parsing message with id %s" % (message['Message-ID']))
-        self._logger.debug(" ")
-        
+        logger.debug("End parsing message with id %s" % (message['Message-ID']))
+        logger.debug(" ")
+        _
 def main():        
-    # Set up logging
+    # Set up console logging
     logger = logging.getLogger('ctatwitter')
-    handler = logging.StreamHandler()
-    logger.addHandler(handler)
     logger.setLevel(logging.DEBUG)
+    stream_handler = logging.StreamHandler()
+    logger.addHandler(stream_handler)
 
     # Parse command line options
     config_file = 'ctatwitter.conf'
     command = None
+    log_file = 'ctatwitter.log'
     try:
         opts, args = getopt.getopt(sys.argv[1:], "f:c:", ["file=", "command="])
     except getopt.GetoptError, err:
@@ -420,12 +419,19 @@ def main():
             config_file = a
         if o in ("-c", "--command"):
             command = a
+        if o in ("-l", "--log-file"):
+            log_file = a
         else:
             assert False, "unhandled option"
 
     # Load the configuration
     config = ConfigParser.ConfigParser()
     config.read(config_file)
+
+    # Set up logging to a file 
+    file_handler = logging.FileHandler(log_file)
+    file_handler.setLevel(logging.ERROR)
+    logger.addHandler(file_handler)
 
     if not command:
         # No command passed on the command line.  Attempt to check messages in e-mail.
