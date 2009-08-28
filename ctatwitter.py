@@ -397,7 +397,7 @@ class CtaTwitterBot(TwitterBot):
         
         logger.debug("End parsing message with id %s" % (message['Message-ID']))
         logger.debug(" ")
-        _
+        
 def main():        
     # Set up console logging
     logger = logging.getLogger('ctatwitter')
