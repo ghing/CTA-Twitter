@@ -143,7 +143,7 @@ class BusTrackerMessageParser(object):
                     logger.error("Couldn't connect to the API: %s" % e)
                     response = "I'm having trouble getting bus information from the CTA's system.  Please try again later."
                 except BustrackerApiXmlError, e:
-                    logger.error("%s", % e)
+                    logger.error("%s" % e)
                     response = "Oops.  That didn't go as planned.  I'm looking into it."
                     
                 # TODO: Add support for showing only stops matching string
@@ -152,22 +152,22 @@ class BusTrackerMessageParser(object):
 
                 try:
                     bt = transitapi.Bustracker()
-                    predicted_busses = bt.getStopPredictions(stop_id, route, direction)
+                    predicted_busses = bt.getStopPredictions(stop_id, route)
                     if len(predicted_busses) == 0:
                         response = "No busses are predicted for this stop."
                     elif len(predicted_busses) == 1:
                         response = "Upcoming bus in %s" % bus.predicted_time
                     else:
                       response = "Upcoming busses in "
-                      for i in range(0, len(predicted_busses):
+                      for i in range(0, len(predicted_busses)):
                           response += predicted_busses[i].predicted_time
                           if i != len(predicted_busses) - 1:
                               response += ", "
-                except BustrackerApiConnectionError, e:
+                except transitapi.BustrackerApiConnectionError, e:
                     logger.error("Couldn't connect to the API: %s" % e)
                     response = "I'm having trouble getting bus information from the CTA's system.  Please try again later."
-                except BustrackerApiXmlError, e:
-                    logger.error("%s", % e)
+                except transitapi.BustrackerApiXmlError, e:
+                    logger.error("%s" % e)
                     response = "Oops.  That didn't go as planned.  I'm looking into it."
             else:
                 # General fail
@@ -417,9 +417,9 @@ def main():
     for o, a in opts:
         if o in ("-f", "--file"):
             config_file = a
-        if o in ("-c", "--command"):
+        elif o in ("-c", "--command"):
             command = a
-        if o in ("-l", "--log-file"):
+        elif o in ("-l", "--log-file"):
             log_file = a
         else:
             assert False, "unhandled option"
@@ -435,11 +435,11 @@ def main():
 
     if not command:
         # No command passed on the command line.  Attempt to check messages in e-mail.
-        bot = CtaTwitterBot(config, logger)
+        bot = CtaTwitterBot(config)
         bot.get_messages()
         bot.parse_messages()
     else:
-        message_parser = BusTrackerMessageParser(logger) 
+        message_parser = BusTrackerMessageParser() 
         response  = message_parser.get_response(command) 
         if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
             sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP

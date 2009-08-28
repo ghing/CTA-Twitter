@@ -144,7 +144,7 @@ class Bustracker(object):
         try:
             dom = xml.dom.minidom.parseString(data)
             busses = []
-            for pre in dom.getElementByTagName('pre'):
+            for pre in dom.getElementsByTagName('pre'):
                 # TODO: Figure out what XML is returned when no busses are predicted
                 predicted_time = pre.getElementsByTagName('pt')[0]
                 from_direction = pre.getElementsByTagName('fd')[0].firstChild.wholeText
@@ -169,7 +169,7 @@ class Bustracker(object):
         except urllib2.URLError, e:
             raise BustrackerApiConnectionError("Network error: %s" % e.reason.args[1])
 
-        busses = self.parse_stop_preditions_xml(data)
+        busses = self.parse_stop_predictions_xml(data)
         
         return busses
 
