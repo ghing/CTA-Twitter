@@ -146,10 +146,10 @@ class Bustracker(object):
             busses = []
             for pre in dom.getElementsByTagName('pre'):
                 # TODO: Figure out what XML is returned when no busses are predicted
-                predicted_time = pre.getElementsByTagName('pt')[0]
+                predicted_time = pre.getElementsByTagName('pt')[0].firstChild.wholeText
                 from_direction = pre.getElementsByTagName('fd')[0].firstChild.wholeText
                 id = pre.getElementsByTagName('v')[0]
-                run = pre.getElementByTagName('rn')[0]
+                run = pre.getElementsByTagName('rn')[0]
                 bus = PredictedBus(id, run, from_direction, predicted_time)
                 busses.append(bus)
 

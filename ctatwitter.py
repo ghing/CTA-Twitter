@@ -149,6 +149,7 @@ class BusTrackerMessageParser(object):
                 # TODO: Add support for showing only stops matching string
             elif len(msg_tokens) == 3 and msg_tokens[2].isdigit():
                 # Entered the id of a stop, try to get next busses.
+                stop_id = msg_tokens[2];
 
                 try:
                     bt = transitapi.Bustracker()
