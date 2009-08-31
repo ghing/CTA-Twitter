@@ -157,7 +157,7 @@ class BusTrackerMessageParser(object):
                     if len(predicted_busses) == 0:
                         response = "No busses are predicted for this stop."
                     elif len(predicted_busses) == 1:
-                        response = "Upcoming bus in %s" % bus.predicted_time
+                        response = "Upcoming bus in %s" % predicted_busses[0].predicted_time
                     else:
                       response = "Upcoming busses in "
                       for i in range(0, len(predicted_busses)):
