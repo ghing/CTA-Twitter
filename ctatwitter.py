@@ -93,6 +93,11 @@ class BusTrackerMessageParser(object):
         del self._name_history
         self._name_history = []
 
+    def filter_stops(self, stops, filter):
+        """Filter out a list of stops based on a string.  The purpose of this is to abstract stop searches (that is, finding a stop id from a stop name, using different partial matching algorithms"""
+        # TODO: Implement this method.  For now, just return the original array.
+        return stops
+
     def get_response(self, msg):
         logger = logging.getLogger()
 
@@ -134,9 +139,15 @@ class BusTrackerMessageParser(object):
                 elif direction =="w":
                    direction_arg = "West Bound"
 
+                filter = None
+                if len(msg_tokens) > 3:
+                    filter = " ".join(msg_tokens[3:])
+
                 try:
                     bt = transitapi.Bustracker()
                     stops = bt.getRouteDirectionStops(route, direction_arg)
+                    if (filter):
+                        stops = self.filter_stops(filter)
                     for stop in stops:
                         response += "%s:%s;" % (stop.id, stop.name) + self.MESSAGE_TOKEN_SEP
                 except BustrackerApiConnectionError, e:
