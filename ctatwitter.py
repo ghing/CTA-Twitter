@@ -380,9 +380,9 @@ class CtaTwitterBot(TwitterBot):
                         sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
                     else:
                         sep = None
-                       
+
                     response_message = shortmessage.ShortMessage(response)
-                    for response_direct_message in response_message.split(sep):
+                    for response_direct_message in response_message.split(140, sep):
                       self._api.PostDirectMessage(message['X-Twittersenderscreenname'], response_direct_message)
 
                 # Everything we wanted to do worked, so log the message so we don't repeat
