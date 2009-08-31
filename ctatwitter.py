@@ -95,8 +95,28 @@ class BusTrackerMessageParser(object):
 
     def filter_stops(self, stops, filter):
         """Filter out a list of stops based on a string.  The purpose of this is to abstract stop searches (that is, finding a stop id from a stop name, using different partial matching algorithms"""
+        filtered_stops = []
+
         # TODO: Implement this method.  For now, just return the original array.
-        return stops
+        for stop in stops:
+            if stop.name.find('&') != -1 and filter.find('&') != -1:
+                # Stop contains ampersand and filter contains ampersan. Search
+                # for partial strings on either side of the ampersand.
+                # For example if the stop name is "60th Street & Blackstone"
+                # we want to match with a filter of "60 & Black"
+                stop_name_parts = stop.name.split('&')
+                filter_parts = filter.name.split('&')
+
+                if len(stop_name_parts) == 2 and len(filter_parts) == 2:
+                    # Only 
+                    if stop_name_parts[0].find(filter_parts[0]) != -1 and \
+                       stop_name_parts[1].find(filter_parts[1]) != -1:
+                        filtered_stops.append(stop)
+            else:
+                if stop.name.find(filter) != -1:
+                    filtered_stops.append(stop)
+             
+        return filtered_stops
 
     def get_response(self, msg):
         logger = logging.getLogger()
