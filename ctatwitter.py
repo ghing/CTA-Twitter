@@ -123,7 +123,7 @@ class BusTrackerMessageParser(object):
         return filtered_stops
 
     def get_response(self, msg):
-        logger = logging.getLogger()
+        logger = logging.getLogger('ctatwitter')
 
         # Split the message into tokens
         msg_tokens = msg.split()
@@ -349,7 +349,7 @@ class CtaTwitterBot(TwitterBot):
         cursor.close()
 
     def parse_message(self, message):
-        logger = logging.getLogger()  
+        logger = logging.getLogger('ctatwitter')  
         logger.debug("Begin parsing message with id %s" % (message['Message-ID']))
 
         if message['X-Twittercreatedat']:
