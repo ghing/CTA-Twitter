@@ -21,6 +21,10 @@ class CommandNotUnderstoodException(BusTrackerMessageParserException):
     """Exception raised when there is some problem with the command syntax"""
     pass           
 
+class MultipleMatchingStopsError(BusTrackerMessageParserException):
+    """Exception raised when a command that requires a stop search returns multiple matching stops"""
+    pass
+
 # NOTE: This is the command syntax:
 # 
 # help|h: Outputs help message
@@ -177,30 +181,49 @@ class BusTrackerMessageParser(object):
                     logger.error("%s" % e)
                     response = "Oops.  That didn't go as planned.  I'm looking into it."
                     
-                # TODO: Add support for showing only stops matching string
-            elif len(msg_tokens) == 3 and msg_tokens[2].isdigit():
-                # Entered the id of a stop, try to get next busses.
-                stop_id = msg_tokens[2];
+            elif len(msg_tokens) >= 3:
+                # Search for next busses
 
                 try:
-                    bt = transitapi.Bustracker()
-                    predicted_busses = bt.getStopPredictions(stop_id, route)
-                    if len(predicted_busses) == 0:
-                        response = "No busses are predicted for this stop."
-                    elif len(predicted_busses) == 1:
-                        response = "Upcoming bus in %s" % predicted_busses[0].predicted_time
-                    else:
-                      response = "Upcoming busses in "
-                      for i in range(0, len(predicted_busses)):
-                          response += predicted_busses[i].predicted_time
-                          if i != len(predicted_busses) - 1:
-                              response += ", "
+                  stop_id = None
+                  bt = transitapi.Bustracker()
+
+                  if msg_tokens[2].isdigit():
+                      # Entered the id of a stop
+                      stop_id = msg_tokens[2];
+                  else:
+                      # Interpret the rest of the command message as the name of a
+                      # stop
+                      filter = " ".join(msg_tokens[3:])
+                      stops = bt.getRouteDirectionStops(route, direction_arg)
+                      stops = self.filter_stops(filter)
+                      if len(stops) == 1:
+                          stop_id = stops[0].id
+                      else:
+                          # TODO: Handle multiple matching stops
+                          raise MultipleMatchingStopsError
+
+                  predicted_busses = bt.getStopPredictions(stop_id, route)
+                  if len(predicted_busses) == 0:
+                      response = "No busses are predicted for this stop."
+                  elif len(predicted_busses) == 1:
+                      response = "Upcoming bus in %s" % predicted_busses[0].predicted_time
+                  else:
+                    response = "Upcoming busses in "
+                    for i in range(0, len(predicted_busses)):
+                        response += predicted_busses[i].predicted_time
+                        if i != len(predicted_busses) - 1:
+                            response += ", "
+
                 except transitapi.BustrackerApiConnectionError, e:
                     logger.error("Couldn't connect to the API: %s" % e)
                     response = "I'm having trouble getting bus information from the CTA's system.  Please try again later."
                 except transitapi.BustrackerApiXmlError, e:
                     logger.error("%s" % e)
                     response = "Oops.  That didn't go as planned.  I'm looking into it."
+                except MultipleMatchingStopsError, e:
+                    response = "Found multiple matching stops.  Try arrowing your search or messaging '%s %s stops' for a list" % (route, direction)
+
             else:
                 # General fail
                 raise CommandNotUnderstoodException("Invalid command.")
