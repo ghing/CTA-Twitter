@@ -8,7 +8,6 @@ class ShortMessage(object):
         """Split the message at word boundaries into strings of max_length length.  Returns a list of strings of max_length or less. Note that this method replaces runs of whitespace with a single space."""
         messages = []
 
-        # TODO: Implement this method
         if len(self._msg) <= max_length:
             # Message is within the length limit.  Just return it.
             messages.append(self._msg)
