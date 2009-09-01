@@ -109,7 +109,7 @@ class BusTrackerMessageParser(object):
                 # For example if the stop name is "60th Street & Blackstone"
                 # we want to match with a filter of "60 & Black"
                 stop_name_parts = stop.name.split('&')
-                filter_parts = filter.name.split('&')
+                filter_parts = filter.split('&')
 
                 if len(stop_name_parts) == 2 and len(filter_parts) == 2:
                     # Only 
@@ -150,18 +150,20 @@ class BusTrackerMessageParser(object):
             if direction not in ('n', 's', 'e', 'w'):
                 raise CommandNotUnderstoodException("Missing direction.")
 
+            if direction == "n":
+               direction_arg = "North Bound"
+            elif direction == "s":
+               direction_arg = "South Bound"
+            elif direction =="e":
+               direction_arg = "East Bound"
+            elif direction =="w":
+               direction_arg = "West Bound"
+
+
             if msg_tokens[2] == 'stops' or msg_tokens[2] == 's':
                 # List stops
 
                 response = "Stops (ID:Name): "
-                if direction == "n":
-                   direction_arg = "North Bound"
-                elif direction == "s":
-                   direction_arg = "South Bound"
-                elif direction =="e":
-                   direction_arg = "East Bound"
-                elif direction =="w":
-                   direction_arg = "West Bound"
 
                 filter = None
                 if len(msg_tokens) > 3:
@@ -171,13 +173,13 @@ class BusTrackerMessageParser(object):
                     bt = transitapi.Bustracker()
                     stops = bt.getRouteDirectionStops(route, direction_arg)
                     if (filter):
-                        stops = self.filter_stops(filter)
+                        stops = self.filter_stops(stops, filter)
                     for stop in stops:
                         response += "%s:%s;" % (stop.id, stop.name) + self.MESSAGE_TOKEN_SEP
-                except BustrackerApiConnectionError, e:
+                except transitapi.BustrackerApiConnectionError, e:
                     logger.error("Couldn't connect to the API: %s" % e)
                     response = "I'm having trouble getting bus information from the CTA's system.  Please try again later."
-                except BustrackerApiXmlError, e:
+                except transitapi.BustrackerApiXmlError, e:
                     logger.error("%s" % e)
                     response = "Oops.  That didn't go as planned.  I'm looking into it."
                     
@@ -196,7 +198,7 @@ class BusTrackerMessageParser(object):
                       # stop
                       filter = " ".join(msg_tokens[3:])
                       stops = bt.getRouteDirectionStops(route, direction_arg)
-                      stops = self.filter_stops(filter)
+                      stops = self.filter_stops(stops, filter)
                       if len(stops) == 1:
                           stop_id = stops[0].id
                       else:
