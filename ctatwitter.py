@@ -12,6 +12,7 @@ import logging
 import shortmessage
 import transitapi
 import re
+import traceback
 
 class BusTrackerMessageParserException(Exception):
     """Base class for exceptions raised by BusTrackerMessageParser"""
@@ -510,4 +511,15 @@ def main():
         
 
 if __name__ ==  "__main__":
-    main()
+    try:
+        main()
+    except:
+        # HACK ALERT! Catch all exceptions and log them until
+        # this service gets to run long enough to get a feel
+        # for what kind of exceptions are to be expected.
+        exception_type, exception_value, exception_traceback = sys.exc_info()
+        
+        for line in traceback.format_exception(exception_type, exception_value, \
+                   exception_traceback):
+            print >> sys.stderr, line
+
