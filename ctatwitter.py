@@ -100,8 +100,6 @@ class BusTrackerMessageParser(object):
 
     def filter_stops(self, stops, filter):
         """Filter out a list of stops based on a string.  The purpose of this is to abstract stop searches (that is, finding a stop id from a stop name, using different partial matching algorithms"""
-        logger = logging.getLogger('ctatwitter')
-        logger.debug("filter_stops: filter = %s" % filter)
         filtered_stops = []
 
         for stop in stops:
@@ -133,8 +131,11 @@ class BusTrackerMessageParser(object):
             raise CommandNotUnderstoodException('Your request is empty!')
         
         if (msg_tokens[0] == 'help' or msg_tokens[0] == 'h'):
-            response = "List stops and their ids: <route #> <direction> s\n" + \
-                       "Get next busses: <route #> <direction> <stop id>\n" + \
+            response = "List stops and their ids: <route #> <direction> (<search>)\n" + \
+                       "Get next busses: <route #> <direction> <stop id>|<search>\n" + \
+                       "Examples:\n" + \
+                       "77 e s - Get stop names and IDs for Eastbound #77 busses.\n" + \
+                       "77 e shef - Get upcoming busses for Sheffield stop.\n" + \
                        "See http://tinyurl.com/ctatwit for more."
 
         elif (msg_tokens[0].isdigit()):
@@ -352,6 +353,9 @@ class CtaTwitterBot(TwitterBot):
         cursor.close()
 
     def parse_message(self, message):
+        logger = logging.getLogger('ctatwitter')
+        logger.debug("Begin parsing message with id %s" % (message['Message-ID']))
+
         if message['X-Twittercreatedat']:
             email_type = message['X-Twitteremailtype']
             sender_screen_name = message['X-Twittersenderscreenname']
@@ -430,7 +434,7 @@ class CtaTwitterBot(TwitterBot):
                         response = "I couldn't understand your request!  Try messaging me with 'help' or see http://tinyurl.com/ctatwit"
                         self._db_log_error_message(message, err)
 
-                    if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
+                    if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP) != -1:
                         sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
                         if len(response) <= 140:
                             response = response.replace(BusTrackerMessageParser.MESSAGE_TOKEN_SEP, '')
@@ -501,7 +505,7 @@ def main():
         else:
             message_parser = BusTrackerMessageParser() 
             response  = message_parser.get_response(command) 
-            if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
+            if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP) != -1:
                 sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
                 if len(response) <= 140:
                     response = response.replace(BusTrackerMessageParser.MESSAGE_TOKEN_SEP, '')
