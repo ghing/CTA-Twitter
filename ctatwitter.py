@@ -100,6 +100,8 @@ class BusTrackerMessageParser(object):
 
     def filter_stops(self, stops, filter):
         """Filter out a list of stops based on a string.  The purpose of this is to abstract stop searches (that is, finding a stop id from a stop name, using different partial matching algorithms"""
+        logger = logging.getLogger('ctatwitter')
+        logger.debug("filter_stops: filter = %s" % filter)
         filtered_stops = []
 
         for stop in stops:
@@ -195,7 +197,7 @@ class BusTrackerMessageParser(object):
                   else:
                       # Interpret the rest of the command message as the name of a
                       # stop
-                      filter = " ".join(msg_tokens[3:])
+                      filter = " ".join(msg_tokens[2:])
                       stops = bt.getRouteDirectionStops(route, direction_arg)
                       stops = self.filter_stops(stops, filter)
                       if len(stops) == 1:
@@ -350,9 +352,6 @@ class CtaTwitterBot(TwitterBot):
         cursor.close()
 
     def parse_message(self, message):
-        logger = logging.getLogger('ctatwitter')  
-        logger.debug("Begin parsing message with id %s" % (message['Message-ID']))
-
         if message['X-Twittercreatedat']:
             email_type = message['X-Twitteremailtype']
             sender_screen_name = message['X-Twittersenderscreenname']
