@@ -488,37 +488,38 @@ def main():
     # Set up logging to a file 
     file_handler = logging.FileHandler(log_file)
     file_handler.setLevel(logging.ERROR)
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-    if not command:
-        # No command passed on the command line.  Attempt to check messages in e-mail.
-        bot = CtaTwitterBot(config)
-        bot.get_messages()
-        bot.parse_messages()
-    else:
-        message_parser = BusTrackerMessageParser() 
-        response  = message_parser.get_response(command) 
-        if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
-            sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
-            if len(response) <= 140:
-                response = response.replace(BusTrackerMessageParser.MESSAGE_TOKEN_SEP, '')
-        else:
-            sep = None
-        response_message = shortmessage.ShortMessage(response)
-        for response_direct_message in response_message.split(140, sep):
-            print response_direct_message
-        
-
-if __name__ ==  "__main__":
     try:
-        main()
+        if not command:
+            # No command passed on the command line.  Attempt to check messages in e-mail.
+            bot = CtaTwitterBot(config)
+            bot.get_messages()
+            bot.parse_messages()
+        else:
+            message_parser = BusTrackerMessageParser() 
+            response  = message_parser.get_response(command) 
+            if response.find(BusTrackerMessageParser.MESSAGE_TOKEN_SEP):
+                sep = BusTrackerMessageParser.MESSAGE_TOKEN_SEP
+                if len(response) <= 140:
+                    response = response.replace(BusTrackerMessageParser.MESSAGE_TOKEN_SEP, '')
+            else:
+                sep = None
+            response_message = shortmessage.ShortMessage(response)
+            for response_direct_message in response_message.split(140, sep):
+                print response_direct_message
     except:
         # HACK ALERT! Catch all exceptions and log them until
         # this service gets to run long enough to get a feel
         # for what kind of exceptions are to be expected.
         exception_type, exception_value, exception_traceback = sys.exc_info()
-        
-        for line in traceback.format_exception(exception_type, exception_value, \
-                   exception_traceback):
-            print >> sys.stderr, line
+       
+        msg = "\n" + ' '.join(traceback.format_exception(exception_type, exception_value, \
+                   exception_traceback))
+        logger.error(msg)
+
+if __name__ ==  "__main__":
+    main()
 
