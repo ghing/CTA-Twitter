@@ -47,7 +47,7 @@ class MultipleMatchingStopsError(BusTrackerMessageParserException):
 # 
 # help|h: Outputs help message
 #
-# <bus_line_number> <direction> stops|s (<stop_name>): List stops and stop IDs as they appear in their route
+# <bus_line_number> <direction> stops|s (<stop_name>): List stops and stop IDs alphabetically 
 # Example: "2 n s" lists all northbound # bus stops
 # Example: "2 n s Stony Island" lists all northbound #2 bus stops that have Stony Island in the n
 #
@@ -170,14 +170,13 @@ class BusTrackerMessageParser(object):
                 raise CommandNotUnderstoodException("Missing direction.")
 
             if direction == "n":
-               direction_arg = "North Bound"
+               direction_arg = "north bound"
             elif direction == "s":
-               direction_arg = "South Bound"
+               direction_arg = "south bound"
             elif direction =="e":
-               direction_arg = "East Bound"
+               direction_arg = "east bound"
             elif direction =="w":
-               direction_arg = "West Bound"
-
+               direction_arg = "west bound"
 
             if msg_tokens[2] == 'stops' or msg_tokens[2] == 's':
                 # List stops
@@ -190,7 +189,7 @@ class BusTrackerMessageParser(object):
 
                 try:
                     bt = transitapi.Bustracker()
-                    stops = bt.getRouteDirectionStops(route, direction_arg)
+                    stops = bt.routeDirectionStopAsXML(route, direction_arg)
                     if (filter):
                         stops = self.filter_stops(stops, filter)
                     for stop in stops:
@@ -216,7 +215,7 @@ class BusTrackerMessageParser(object):
                       # Interpret the rest of the command message as the name of a
                       # stop
                       filter = " ".join(msg_tokens[2:])
-                      stops = bt.getRouteDirectionStops(route, direction_arg)
+                      stops = bt.routeDirectionStopAsXML(route, direction_arg)
                       stops = self.filter_stops(stops, filter)
                       if len(stops) == 1:
                           stop_id = stops[0].id
